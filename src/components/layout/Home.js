@@ -5,8 +5,8 @@ const Home = () => {
   return (
     <div>
       <h1>Nanny in a Flash</h1>
-      <Link to="/register">Log In</Link>
-      <Link to="/login">Sign Up</Link>
+      <Link to="/login">Log In</Link>
+      <Link to="/register">Sign Up</Link>
     </div>
   );
 };

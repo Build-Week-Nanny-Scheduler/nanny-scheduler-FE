@@ -15,6 +15,7 @@ const RegisterFrom = ({ values, errors, touched }, props) => {
   const [userResidence, setUserResidence, handleUserResidence] = useInput("");
 
   const handleSubmit = e => {
+    console.log(firstName);
     e.preventDefault();
     axiosWithAuth()
       .post("/auth/register", [
