@@ -7,6 +7,7 @@ import { LoginFromFormik } from "./components/auth/Login";
 import Home from "./components/layout/Home";
 import { CreateRequest } from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
+import Dashboard from "./components/layout/Dashboard";
 
 function App() {
   return (
