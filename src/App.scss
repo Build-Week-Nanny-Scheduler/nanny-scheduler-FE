@@ -47,8 +47,12 @@
   display: flex;
   flex-flow: column wrap;
   margin: auto 4px;
-  height: 100%;
+  //height: 100%;
   background: #958adb;
+  position: absolute;
+  top: 0px;
+  z-index: 999;
+  width: 100%;
   a {
     width: 90%;
     border: solid 2px black;
