@@ -1,5 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export const Login = () => {
-  return <div>Login</div>;
+import { withFormik, Form, Field } from "formik";
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
+
+const LoginFrom = ({ values, errors, touched }) => {
+  const [loginForm, setLoginForm] = useState([]);
+
+  return (
+    <>
+      <Form>
+        <Field type="text" name="username" placeholder="Your Username" />
+        {touched.username && errors.username && <p>{errors.username}</p>}
+
+        <Field type="password" name="password" placeholder="Your Password" />
+        {touched.password && errors.password && <p>{errors.password}</p>}
+      </Form>
+      <p>Don't Have an Account?</p>
+      <Link to="/register">Sign Up</Link>
+    </>
+  );
 };
+
+export const LoginFromFormik = withFormik({
+  mapPropsToValues({ username, password }) {
+    return {
+      username: username || "",
+      password: password || ""
+    };
+  },
+  validationSchema: Yup.object().shape({
+    username: Yup.string().required(),
+    password: Yup.string().required()
+  })
+})(LoginFrom);
+
+/*
+to clear things up with regards to the data, we need:
+-firstName
+-lastName
+-username
+-password
+-city
+-state
+*/

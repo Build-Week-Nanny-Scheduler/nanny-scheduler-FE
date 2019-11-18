@@ -1,7 +1,7 @@
 import React from "react";
 
-const Request = () => {
+const NannyList = () => {
   return <div></div>;
 };
 
-export default Request;
+export default NannyList;

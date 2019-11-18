@@ -1,19 +1,19 @@
 import React from "react";
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
+
+import { RegisterFromFormik } from "./components/auth/Register";
+import { LoginFromFormik } from "./components/auth/Login";
+import Home from "./components/layout/Home";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [loginComponent, setLoginComponent] = useState();
   return (
-    <>
-      {!loggedin ? (
-        <Route exact path="/" component={login} />
-      ) : (
-        <Route exact path="/" component={Register} />
-      )}
-      <PrivateRoute path="/dashboard" component={Dashboard} />
-    </>
+    <div className="App">
+      App
+      <Route exact path="/" component={Home} />
+      <Route path="/register" component={RegisterFromFormik} />
+      <Route path="/login" component={LoginFromFormik} />
+    </div>
   );
 }
 
