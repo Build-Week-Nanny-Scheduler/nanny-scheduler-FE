@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Route } from "react-router-dom";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import Dashboard from "./components/layout/Dashboard";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [loginComponent, setLoginComponent] = useState();
+
   return (
     <>
-      {!loggedin ? (
-        <Route exact path="/" component={login} />
+      {!loggedIn ? (
+        <Route exact path="/" component={Login} />
       ) : (
         <Route exact path="/" component={Register} />
       )}
-      <PrivateRoute path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard" component={Dashboard} />
     </>
   );
 }
 
+//NOTE: Dashboard will become privateroute once login is functional
 export default App;

@@ -1,5 +1,13 @@
 import React from "react";
 
-export const Register = () => {
+const Register = () => {
   return <div>Register</div>;
 };
+
+/*
+-Login UI with form validation
+-Add to App.js
+-Create Post request to /register and /login and reroute
+*/
+
+export default Register;
