@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import RequestList from "../requests/viewRequests/RequestList";
 
 const Dashboard = () => {
   const [requests, setRequests] = useState([]);
+  const [nannyList, setNannyList] = useState([]);
+  const [nannyStatus, setNannyStatus] = useState(false);
   return (
     <div>
-      <h1>Requests</h1>
+      {!nannyStatus ? (
+        <RequestList requests={requests} />
+      ) : (
+        <NannyList nannies={nannies} />
+      )}
     </div>
   );
 };
