@@ -13,7 +13,8 @@ function App() {
     <div className="App">
       <Link to="/menu">
         <div className="topBanor">
-          Nanny in a Flash
+          <img src="https://eager-meninsky-104020.netlify.com/images/nannyLogo.png" />
+          <p>Nanny in a Flash</p>
         </div>
       </Link>
       App
