@@ -8,7 +8,7 @@ const LoginFrom = ( { values, errors, touched } ) => {
   const [loginForm, setLoginForm] = useState([]);
 
   return (
-    <Form>
+    <Form className="loginForm">
       <Field type="text" name="username" placeholder="Your Username" />
       {touched.username && errors.username && (
         <p>{errors.username}</p>
