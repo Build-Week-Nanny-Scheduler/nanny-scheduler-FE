@@ -6,6 +6,7 @@ import { RegisterFromFormik } from "./components/auth/Register";
 import { LoginFromFormik } from "./components/auth/Login";
 import Home from "./components/layout/Home";
 import CreateRequest from "./components/requests/CreateRequest";
+import Dashboard from "./components/layout/Dashboard";
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
       <Route path="/" component={CreateRequest} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
+      <Route path="/dashboard" component={Dashboard} />
     </div>
   );
 }
 
+//create request is temporarily located in the requests
 export default App;
