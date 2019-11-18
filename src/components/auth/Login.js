@@ -19,7 +19,7 @@ const LoginFrom = ( { values, errors, touched } ) => {
         <p>{errors.password}</p>
       )}
 
-      <button type="submit">Submit</button
+      <button type="submit">Submit</button>
     </Form>
   );
 };
