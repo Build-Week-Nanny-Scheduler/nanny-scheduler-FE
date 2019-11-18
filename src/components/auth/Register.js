@@ -3,35 +3,82 @@ import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import { useInput } from "../../hooks/useInput";
 import * as Yup from "yup";
-
-const RegisterFrom = ({ values, errors, touched }) => {
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import axios from "axios";
+const RegisterFrom = ({ values, errors, touched }, props) => {
   const [registerForm, setRegisterForm] = useState([]);
   const [firstName, setFirstName, handleFirstName] = useInput("");
   const [lastName, setLastName, handleLastName] = useInput("");
-  const [userName, setUsername, handleUserName] = useInput("");
+  const [username, setUsername, handleUsername] = useInput("");
   const [password, setPassword, handlePassWord] = useInput("");
   const [city, setCity, handleCity] = useInput("");
   const [userResidence, setUserResidence, handleUserResidence] = useInput("");
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/auth/register", [
+        { firstName, lastName, username, password, city, userResidence }
+      ])
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        props.history.push("/dashboard");
+      });
+  };
   return (
     <div>
-      <Form>
-        <Field type="text" name="firstName" placeholder="First Name" />
+      <Form onSubmit={e => handleSubmit(e)}>
+        <Field
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          value={firstName}
+          onChange={e => handleFirstName(e.target.value)}
+        />
         {touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
 
-        <Field type="text" name="lastName" placeholder="Last Name" />
+        <Field
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={e => handleLastName(e.target.value)}
+        />
         {touched.lastName && errors.lastName && <p>{errors.lastName}</p>}
 
-        <Field type="text" name="username" placeholder="Your Username" />
+        <Field
+          type="text"
+          name="username"
+          placeholder="Your Username"
+          value={username}
+          onChange={e => handleUsername(e.target.value)}
+        />
         {touched.username && errors.username && <p>{errors.username}</p>}
 
-        <Field type="password" name="password" placeholder="Your Password" />
+        <Field
+          type="password"
+          name="password"
+          placeholder="Your Password"
+          value={password}
+          onChange={e => handlePassWord(e.target.value)}
+        />
         {touched.password && errors.password && <p>{errors.password}</p>}
 
-        <Field type="text" name="city" placeholder="Your City" />
+        <Field
+          type="text"
+          name="city"
+          placeholder="Your City"
+          value={city}
+          onChange={e => handleCity(e.target.value)}
+        />
         {touched.city && errors.city && <p>{errors.city}</p>}
 
-        <Field as="select" name="state">
+        <Field
+          as="select"
+          name="state"
+          value={userResidence}
+          onChange={e => handleUserResidence(e.target.value)}
+        >
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>

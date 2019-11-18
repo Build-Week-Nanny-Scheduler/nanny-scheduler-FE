@@ -1,7 +1,11 @@
 import React from "react";
 
 const CreateRequest = () => {
-  return <div></div>;
+  return (
+    <div>
+      <h1>Create Request</h1>
+    </div>
+  );
 };
 
 export default CreateRequest;
