@@ -4,7 +4,7 @@ import "./App.css";
 import { Route, Link } from 'react-router-dom';
 
 import { RegisterFromFormik } from './components/auth/Register';
-import { LoginFromFormik } from './components/auth/Login';
+import {LoginFromFormik } from './components/auth/Login';
 
 function App() {
 
