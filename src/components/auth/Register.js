@@ -16,19 +16,6 @@ const RegisterFrom = ({ values, errors, touched }) => {
   const [city, setCity, handleCity] = useInput("");
   const [state, setState, handleState] = useInput("");
 
-<<<<<<< HEAD
-const Register = () => {
-  return <div>Register</div>;
-};
-
-/*
--Login UI with form validation
--Add to App.js
--Create Post request to /register and /login and reroute
-*/
-
-export default Register;
-=======
   const handleSubmit = e => {
     e.preventDefault();
     axiosWithAuth()
@@ -197,4 +184,3 @@ to clear things up with regards to the data, we need:
 -city
 -state
 */
->>>>>>> origin/master
