@@ -14,6 +14,19 @@ const RegisterFrom = ({ values, errors, touched }, props) => {
   const [city, setCity, handleCity] = useInput("");
   const [userResidence, setUserResidence, handleUserResidence] = useInput("");
 
+<<<<<<< HEAD
+const Register = () => {
+  return <div>Register</div>;
+};
+
+/*
+-Login UI with form validation
+-Add to App.js
+-Create Post request to /register and /login and reroute
+*/
+
+export default Register;
+=======
   const handleSubmit = e => {
     console.log(firstName);
     e.preventDefault();
@@ -173,3 +186,4 @@ to clear things up with regards to the data, we need:
 -city
 -state
 */
+>>>>>>> origin/master

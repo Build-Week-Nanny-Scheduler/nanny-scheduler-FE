@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./App.scss";
 import { Route, Link } from "react-router-dom";
@@ -26,4 +27,5 @@ function App() {
   );
 }
 
+//NOTE: Dashboard will become privateroute once login is functional
 export default App;

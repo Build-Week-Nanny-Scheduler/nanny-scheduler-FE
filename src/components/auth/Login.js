@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
 
+<<<<<<< HEAD
+const Login = () => {
+  return <div>Login</div>;
+};
+
+/*
+-Login UI with form validation
+-Add to App.js
+-Create Post request to api and reroute
+*/
+export default Login;
+=======
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -44,3 +56,4 @@ to clear things up with regards to the data, we need:
 -city
 -state
 */
+>>>>>>> origin/master
