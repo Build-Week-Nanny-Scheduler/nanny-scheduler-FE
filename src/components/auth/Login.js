@@ -18,6 +18,8 @@ const LoginFrom = ( { values, errors, touched } ) => {
       {touched.password && errors.password && (
         <p>{errors.password}</p>
       )}
+
+      <button type="submit">Submit</button
     </Form>
   );
 };
