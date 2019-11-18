@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
+import { useInput } from "../../hooks/useInput";
 import * as Yup from "yup";
 
 const RegisterFrom = ({ values, errors, touched }) => {
   const [registerForm, setRegisterForm] = useState([]);
+  const [firstName, setFirstName, handleFirstName] = useInput("");
+  const [lastName, setLastName, handleLastName] = useInput("");
+  const [userName, setUsername, handleUserName] = useInput("");
+  const [password, setPassword, handlePassWord] = useInput("");
+  const [city, setCity, handleCity] = useInput("");
+  const [userResidence, setUserResidence, handleUserResidence] = useInput("");
 
   return (
     <div>
