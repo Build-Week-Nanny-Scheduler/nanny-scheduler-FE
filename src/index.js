@@ -9,4 +9,8 @@ import { Provider } from "react-redux";
 
 import history from "./history";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
