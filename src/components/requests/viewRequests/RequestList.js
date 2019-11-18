@@ -1,5 +1,7 @@
 import React from "react";
 
-export const RequestList = () => {
+const RequestList = props => {
   return <div></div>;
 };
+
+export default RequestList;
