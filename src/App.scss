@@ -5,6 +5,13 @@
 
 .App {
   text-align: center;
+  color: pink;
+  @media (min-width: $tablet) {
+    color: green;
+  }
+  @media (min-width: $desktop) {
+    color: black;
+  }
 }
 
 .App-logo {
