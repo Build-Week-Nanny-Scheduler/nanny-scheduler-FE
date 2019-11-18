@@ -3,21 +3,36 @@ import React, { useState, useEffect } from "react";
 import {withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-const RegisterFrom = (  ) => {
+const RegisterFrom = ( { values, errors, touched } ) => {
 
   const [registerForm, setRegisterForm] = useState([]);
 
   return (
     <Form>
       <Field type="text" name="firstName" placeholder="First Name" />
+      {touched.firstName && errors.firstName && (
+        <p>{errors.firstName}</p>
+      )}
 
       <Field type="text" name="lastName" placeholder="Last Name" />
+      {touched.lastName && errors.lastName && (
+        <p>{errors.lastName}</p>
+      )}
 
       <Field type="text" name="username" placeholder="Your Username" />
+      {touched.username && errors.username && (
+        <p>{errors.username}</p>
+      )}
 
       <Field type="password" name="password" placeholder="Your Password" />
+      {touched.password && errors.password && (
+        <p>{errors.password}</p>
+      )}
 
       <Field type="text" name="city" placeholder="Your City" />
+      {touched.city && errors.city && (
+        <p>{errors.city}</p>
+      )}
 
       <Field as="select" name="state">
         <option>Please Choose Your State</option>
@@ -72,6 +87,9 @@ const RegisterFrom = (  ) => {
         <option value="Wisconsin">Wisconsin</option>
         <option value="Wyoming">Wyoming</option>
       </Field>
+      {touched.state && errors.state && (
+        <p>{errors.state}</p>
+      )}
 
       <button type="submit">Submit</button>
     </Form>
@@ -89,6 +107,14 @@ export const RegisterFromFormik = withFormik({
       state: state || "",
     };
   },
+  validationSchema: Yup.object().shape({
+    firstName: Yup.string().required(),
+    lastName: Yup.string().required(),
+    username: Yup.string().required(),
+    password: Yup.string().required(),
+    city: Yup.string().required(),
+    state: Yup.string().required(),
+  }),
 
 })(RegisterFrom);
 
