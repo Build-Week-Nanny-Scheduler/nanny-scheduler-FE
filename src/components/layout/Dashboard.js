@@ -3,7 +3,7 @@ import RequestList from "../requests/viewRequests/RequestList";
 import NannyList from "../nanny/NannyList";
 
 const Dashboard = () => {
-  const [nannyStatus, setNannyStatus] = useState(false);
+  const [nannyStatus, setNannyStatus] = useState(true);
   /*currently set to false, which will allow nannylist to display.  When trying to display RequestList, manually change to true for now until */
 
   return (
