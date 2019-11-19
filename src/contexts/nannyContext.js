@@ -31,15 +31,17 @@ export const NannyProvider = props => {
 
   return (
     <>
-    <p>NannyContext</p>
     {nannyList.map(item => (
         <>
         <div key={item.id} className="nannyCard">
           <h2>Nanny {item.firstName} {item.lastName}</h2>
-          <ul key={item.id}>
-            <li>Available: {item.Available}</li>
-            <li>canDrive: {item.canDrive}</li>
-          </ul>
+          <div key={item.id} className="card2Grid">
+            <div>Available:</div><div>{item.Available}</div>
+            <div>Can Drive:</div><div>{item.canDrive}</div>
+            <div>Location:</div><div>{item.city}, {item.state}</div>
+            <div>Rate:</div><div>{item.rates}</div>
+            <div>Services:</div><div>{item.services}</div>
+          </div>
         </div>
         </>
       ))}
@@ -59,14 +61,14 @@ export const NannyProvider = props => {
 
 /*
   Available: null
-​ canDrive: null
-​​city: null
+​   canDrive: null
+​​  city: null
   ​​firstName: "Amberly"
 ​​id: 1
 ​​isNanny: null
 ​​  lastName: "Soren"
 ​​password: "$2a$10$7VBuCeGOUh6.SYut5AtPvOasz6KpEwQ3pDZU9vyenlfoU9bxTXi.a"
-​​rates: null
+​​  rates: null
 ​​services: null
 ​​state: null
 ​​username: "Amberly"

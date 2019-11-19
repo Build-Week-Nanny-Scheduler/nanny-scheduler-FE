@@ -36,7 +36,7 @@
 .topBanor {
   height: 100px;
   //border: solid 2px black;
-  background: #958adb;
+  background: $maincolor;
   font-family: 'Arizonia', cursive;
   font-size: 2.8rem;
   display: flex;
@@ -66,13 +66,13 @@
   min-height: 100vh;
   display: flex;
   flex-flow: column;
-  background: #958adb;
+  background: $maincolor;
   .navBar {
     display: flex;
     flex-flow: column wrap;
     margin: auto 4px;
     //height: 100%;
-    background: #958adb;
+    background: $maincolor;
     z-index: 999;
     width: 100%;
     a {
@@ -81,7 +81,7 @@
       margin: 3px auto;
       padding: 20px 0;
       font-size: 2rem;
-      background-color: #b2c3e7;
+      background-color: $maincolor2;
       color: black;
       text-decoration: none;
     }
@@ -109,7 +109,7 @@ form {
   }
   button {
     width: 85%;
-    background: #958adb;
+    background: $maincolor;
     margin: 10px auto;
     font-size: 3.0rem;
     border-radius: 15px;
@@ -124,6 +124,34 @@ form {
     select {
       width: 33%;
       margin: 2px;
+    }
+  }
+  @media (min-width: $tablet) {}
+  @media (min-width: $desktop) {}
+}
+
+
+//NANNY CARDS
+.nannyCard {
+  display: flex;
+  flex-flow: column;
+  text-align: left;
+  width: 90%;
+  margin: 2px auto;
+  background: $maincolor;
+  border: solid 2px black;
+  border-radius: 13px;
+  h2 {
+    margin: 0.25em 0 12px 0.5em;
+  }
+  .card2Grid{
+    width: 85%;
+    margin: 0 auto 13px auto;
+    display: flex;
+    flex-flow: row wrap;
+    div {
+      width: 49%;
+      padding: 0.12em 0;
     }
   }
   @media (min-width: $tablet) {}
