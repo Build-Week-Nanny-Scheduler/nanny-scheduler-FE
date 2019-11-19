@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Arizonia&display=swap');
+
+@import 'SASS/var';
+
+.App {
+  text-align: center;
+  color: pink;
+  @media (min-width: $tablet) {
+    color: green;
+  }
+  @media (min-width: $desktop) {
+    color: black;
+  }
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+//LOGO BAR
+.topBanor {
+  height: 100px;
+  //border: solid 2px black;
+  background: #958adb;
+  font-family: 'Arizonia', cursive;
+  font-size: 2.8rem;
+  display: flex;
+  align-items: center;
+  img {
+    height: 100px;
+  }
+  p {
+    width: 70%;
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+    color: #e7d6b2;
+  }
+  @media (min-width: $tablet) {}
+  @media (min-width: $desktop) {}
+}
+
+//NAV MENU
+.navBar {
+  display: flex;
+  flex-flow: column wrap;
+  margin: auto 4px;
+  //height: 100%;
+  background: #958adb;
+  position: absolute;
+  top: 0px;
+  z-index: 999;
+  width: 100%;
+  a {
+    width: 90%;
+    border: solid 2px black;
+    margin: 1px auto;
+    padding: 20px;
+    font-size: 2rem;
+    background-color: #b2c3e7;
+    color: black;
+    text-decoration: none;
+  }
+
+  @media (min-width: $tablet) {}
+  @media (min-width: $desktop) {}
+}
+
+//BASE FORM
+form {
+  display: flex;
+  flex-flow: column wrap;
+  input {
+    width: 90%;
+    margin: 1px auto;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+  select {
+    width: 93%;
+    margin: 2px auto;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+  button {
+    width: 85%;
+    background: #958adb;
+    margin: 10px auto;
+    font-size: 3.0rem;
+    border-radius: 15px;
+    border: 1px solid black;
+    color: white;
+    font-family: 'Arizonia', cursive;
+  }
+  div{
+    display: flex;
+    width: 94%;
+    margin: 1px auto;
+    select {
+      width: 33%;
+      margin: 2px;
+    }
+  }
+  @media (min-width: $tablet) {}
+  @media (min-width: $desktop) {}
+}
