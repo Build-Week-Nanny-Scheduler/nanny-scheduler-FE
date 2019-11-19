@@ -8,8 +8,10 @@ import Home from "./components/layout/Home";
 import { CreateRequest } from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
 import Dashboard from "./components/layout/Dashboard";
+import { NannyProvider } from "./contexts/nannyContext";
+import { RequestProvider } from "./contexts/requestContext";
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <Link to="/menu">
@@ -24,7 +26,11 @@ function App(props) {
       <Route exact path="/" component={Home} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
-      <Route path="/dashboard" component={Dashboard} />
+      <NannyProvider>
+        <RequestProvider>
+          <Route path="/dashboard" component={Dashboard} />
+        </RequestProvider>
+      </NannyProvider>
     </div>
   );
 }

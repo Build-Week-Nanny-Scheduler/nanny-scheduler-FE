@@ -6,11 +6,9 @@ import * as Yup from "yup";
 import { useInput } from "../../hooks/useInput";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-const LoginFrom = ({ values, errors, touched, props }) => {
+const LoginFrom = ({ values, errors, touched }) => {
   const [username, setUsername, handleUsername] = useInput();
   const [password, setPassword, handlePassword] = useInput();
-
-  console.log(props);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,7 +16,7 @@ const LoginFrom = ({ values, errors, touched, props }) => {
       .post("/auth/login", { username, password })
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        console.log("logged in");
+        window.location.href = "/dashboard";
       })
       .catch(error => {
         console.log(error);
