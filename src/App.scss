@@ -56,29 +56,39 @@
 }
 
 //NAV MENU
-.navBar {
-  display: flex;
-  flex-flow: column wrap;
-  margin: auto 4px;
-  //height: 100%;
-  background: #958adb;
+.pageMenu {
   position: absolute;
   top: 0px;
-  z-index: 999;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100%;
   width: 100%;
-  a {
-    width: 90%;
-    border: solid 2px black;
-    margin: 1px auto;
-    padding: 20px;
-    font-size: 2rem;
-    background-color: #b2c3e7;
-    color: black;
-    text-decoration: none;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+  background: #958adb;
+  .navBar {
+    display: flex;
+    flex-flow: column wrap;
+    margin: auto 4px;
+    //height: 100%;
+    background: #958adb;
+    z-index: 999;
+    width: 100%;
+    a {
+      width: 90%;
+      border: solid 2px black;
+      margin: 3px auto;
+      padding: 20px 0;
+      font-size: 2rem;
+      background-color: #b2c3e7;
+      color: black;
+      text-decoration: none;
+    }
   }
-
   @media (min-width: $tablet) {}
   @media (min-width: $desktop) {}
+
 }
 
 //BASE FORM
