@@ -9,6 +9,8 @@ import { CreateRequest } from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
 import Dashboard from "./components/layout/Dashboard";
 
+import { NannyProvider } from "./contexts/nannyContext";
+
 function App() {
   return (
     <div className="App">
@@ -26,6 +28,9 @@ function App() {
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
       <Route path="/dashboard" component={Dashboard} />
+
+
+      <NannyProvider />
     </div>
   );
 }
