@@ -10,6 +10,7 @@ export const Navigation = () => {
         <Link to="/">Create Request</Link>
         <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
+        <Link to="/nanny">Nanny</Link>
       </nav>
       <div className="topBanor">
         <img src="https://eager-meninsky-104020.netlify.com/images/nannyLogo.png" />

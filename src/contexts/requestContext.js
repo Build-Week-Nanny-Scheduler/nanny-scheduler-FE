@@ -2,7 +2,9 @@ import React, { useState, useEffect, createContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export const RequestContext = createContext();
-/*this is context api; it's a state management tool that allows us to pass state freely between components without having to prop drill. everything wrapped in <NannyProvider> tags in the app.js will have access to the state held within this file.*/
+/*this is context api; it's a state management tool that allows us to pass state freely
+between components without having to prop drill. everything wrapped in
+<NannyProvider> tags in the app.js will have access to the state held within this file.*/
 
 export const RequestProvider = props => {
   const [requestList, setRequestList] = useState();
@@ -15,13 +17,21 @@ export const RequestProvider = props => {
     All you have to do for your request is add the last portion of the api
     endpoint inside your get request. I.E. ('/users').*/
     axiosWithAuth()
-      .get()
-      .then()
-      .catch();
+    .get('https://nanny-api.herokuapp.com/api/requests/all')
+    .then(response => {
+      console.log(response.data)
+      setRequestList(response.data)
+    })
+    .catch( error => {
+      console.log("error", error.message)
+    })
   }, []);
+
   return (
+    <>
     <RequestContext.Provider value={[requestList, setRequestList]}>
       {props.children}
     </RequestContext.Provider>
+    </>
   );
 };

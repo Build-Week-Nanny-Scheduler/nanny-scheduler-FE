@@ -10,6 +10,7 @@ import { Navigation } from "./components/navigation/NavBar";
 import Dashboard from "./components/layout/Dashboard";
 
 import { NannyProvider } from "./contexts/nannyContext";
+import { RequestProvider } from "./contexts/requestContext";
 
 function App() {
   return (
@@ -24,13 +25,13 @@ function App() {
       App
       <Route exact path="/menu" component={Navigation} />
       <Route exact path="/" component={Home} />
-      <Route path="/" component={CreateRequest} />
+      <Route path="/findthisaplace" component={CreateRequest} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/nanny" component={NannyProvider} />
 
-
-      <NannyProvider />
+      <RequestProvider />
     </div>
   );
 }
