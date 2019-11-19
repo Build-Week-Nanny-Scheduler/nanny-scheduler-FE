@@ -13,7 +13,11 @@ function App(props) {
   return (
     <div className="App">
       <Link to="/menu">
-        <div className="topBanor">Nanny in a Flash</div>
+        <div className="topBanor">
+          <img src="https://eager-meninsky-104020.netlify.com/images/nannyLogo.png" />
+          <p>Nanny in a Flash</p>
+          <img src="https://raw.githubusercontent.com/Build-Week-Nanny-Scheduler/nanny-scheduler-FE/Russ_Hacker2-so-master-updates-show/src/img/menu.png" />
+        </div>
       </Link>
       App
       <Route exact path="/menu" component={Navigation} />
