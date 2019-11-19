@@ -5,24 +5,6 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useInput } from "../../hooks/useInput";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
-<<<<<<< HEAD
-
-const LoginFrom = ({ values, errors, touched, props }) => {
-  const [username, setUsername, handleUsername] = useInput();
-  const [password, setPassword, handlePassword] = useInput();
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    axiosWithAuth()
-      .post("/auth/login", { username, password })
-      .then(res => {
-        console.log("test");
-        localStorage.setItem("token", res.data.token);
-        console.log("logged in");
-      })
-      .then((window.location.href = "/dashboard"))
-=======
 
 const LoginFrom = ({ values, errors, touched }) => {
   const [username, setUsername, handleUsername] = useInput();
@@ -36,7 +18,6 @@ const LoginFrom = ({ values, errors, touched }) => {
         localStorage.setItem("token", res.data.token);
         window.location.href = "/dashboard";
       })
->>>>>>> master
       .catch(error => {
         console.log(error);
       });
