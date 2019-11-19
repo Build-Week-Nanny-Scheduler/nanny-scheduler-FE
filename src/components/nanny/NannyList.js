@@ -5,12 +5,6 @@ import { NannyContext } from "../../contexts/nannyContext";
 const NannyList = () => {
   const [nannyList, setNannyList] = useContext(NannyContext);
   //NannyContext will set nannylist to whatever was returned from your axiosWithAuthCall
-<<<<<<< HEAD
-  useEffect(() => {
-    console.log(nannyList);
-  }, [nannyList]);
-  return <div></div>;
-=======
   return (
     <div>
       {nannyList.map(item => (
@@ -29,7 +23,6 @@ const NannyList = () => {
       ))}
     </div>
   );
->>>>>>> master
 };
 
 export default NannyList;

@@ -8,23 +8,12 @@ export const RequestProvider = props => {
 
   useEffect(() => {
     axiosWithAuth()
-<<<<<<< HEAD
       .get("/requests/all")
       .then(async res => {
         await setRequestList(res.data);
         console.log(requestList);
       })
       .catch();
-=======
-      .get("https://nanny-api.herokuapp.com/api/requests/all")
-      .then(response => {
-        console.log(response.data);
-        setRequestList(response.data);
-      })
-      .catch(error => {
-        console.log("error", error.message);
-      });
->>>>>>> master
   }, []);
 
   return (
