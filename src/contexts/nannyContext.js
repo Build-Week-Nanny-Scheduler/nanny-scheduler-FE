@@ -30,7 +30,6 @@ export const NannyProvider = props => {
 
   return (
     <>
-    <p>NannyContext</p>
     {nannyList.map(item => (
         <>
         <div key={item.id} className="nannyCard">
