@@ -16,12 +16,14 @@ export const NannyProvider = props => {
     All you have to do for your request is add the last portion of the api endpoint
     inside your get request. I.E. ('/users').*/
     axiosWithAuth()
-      .get('https://nanny-api.herokuapp.com/api/nanny')
+      .get('https://nanny-api.herokuapp.com/api/users')
       .then(response => {
         console.log(response.data)
         //setNannyList(response.data.photos)
       })
-      .catch();
+      .catch( error => {
+        console.log("error", error.message)
+      })
   }, []);
 
   return (
