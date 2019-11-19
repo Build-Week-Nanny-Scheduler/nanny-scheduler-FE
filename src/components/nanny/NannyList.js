@@ -12,13 +12,13 @@ const NannyList = () => {
           <h2>
             Nanny {item.firstName} {item.lastName}
           </h2>
-          <ul key={item.id}>
-            <li>Available: {item.Available ? item.Available : "Ask Me"}</li>
-            <li>
-              Willing to Drive Children:
-              {item.canDrive ? item.canDrive : "Ask Me"}
-            </li>
-          </ul>
+          <div key={item.id} className="card2Grid">
+            <div>Available:</div><div>{item.Available ? item.Available : "Ask Me"}</div>
+            <div>Can Drive:</div><div>{item.canDrive ? item.canDrive : "Ask Me"}</div>
+            <div>Location:</div><div>{item.city ? item.city : "Ask Me"}, {item.state ? item.state : "Ask Me"}</div>
+            <div>Rate:</div><div>{item.rates ? item.rates : "Ask Me"}</div>
+            <div>Services:</div><div>{item.services ? item.services : "Ask Me"}</div>
+          </div>
         </div>
       ))}
     </div>
