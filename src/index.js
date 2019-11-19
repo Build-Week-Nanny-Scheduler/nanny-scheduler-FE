@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import history from "./history";
 
 ReactDOM.render(
-  <Router>
+  <Router history={history} forceRefresh={true}>
     <App />
   </Router>,
   document.getElementById("root")

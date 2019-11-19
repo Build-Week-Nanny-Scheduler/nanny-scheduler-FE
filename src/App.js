@@ -7,6 +7,7 @@ import { LoginFromFormik } from "./components/auth/Login";
 import Home from "./components/layout/Home";
 import { CreateRequest } from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
+import Dashboard from "./components/layout/Dashboard";
 
 function App() {
   return (
@@ -24,8 +25,10 @@ function App() {
       <Route path="/" component={CreateRequest} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
+      <Route path="/dashboard" component={Dashboard} />
     </div>
   );
 }
 
+//NOTE: Dashboard will become privateroute once login is functional
 export default App;
