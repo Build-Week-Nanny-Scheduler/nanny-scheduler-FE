@@ -5,6 +5,9 @@ import { NannyContext } from "../../contexts/nannyContext";
 const NannyList = () => {
   const [nannyList, setNannyList] = useContext(NannyContext);
   //NannyContext will set nannylist to whatever was returned from your axiosWithAuthCall
+  useEffect(() => {
+    console.log(nannyList);
+  }, [nannyList]);
   return <div></div>;
 };
 
