@@ -12,31 +12,18 @@ const RegisterFrom = ({ values, errors, touched }, props) => {
   const [username, setUsername, handleUsername] = useInput("");
   const [password, setPassword, handlePassWord] = useInput("");
   const [city, setCity, handleCity] = useInput("");
-  const [userResidence, setUserResidence, handleUserResidence] = useInput("");
+  const [state, setState, handleState] = useInput("");
 
-<<<<<<< HEAD
-const Register = () => {
-  return <div>Register</div>;
-};
-
-/*
--Login UI with form validation
--Add to App.js
--Create Post request to /register and /login and reroute
-*/
-
-export default Register;
-=======
   const handleSubmit = e => {
     console.log(firstName);
     e.preventDefault();
     axiosWithAuth()
       .post("/auth/register", [
-        { firstName, lastName, username, password, city, userResidence }
+        { firstName, lastName, username, password, city, state }
       ])
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        props.history.push("/dashboard");
+        window.location.href = "/dashboard";
       });
   };
   return (
@@ -90,8 +77,8 @@ export default Register;
         <Field
           as="select"
           name="state"
-          value={userResidence}
-          onChange={e => handleUserResidence(e.target.value)}
+          value={state}
+          onChange={e => handleState(e.target.value)}
         >
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
@@ -186,4 +173,3 @@ to clear things up with regards to the data, we need:
 -city
 -state
 */
->>>>>>> origin/master
