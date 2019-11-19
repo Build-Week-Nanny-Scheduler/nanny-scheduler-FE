@@ -49,6 +49,7 @@
     text-decoration: none;
     padding: 0px;
     margin: 0px;
+    color: #e7d6b2;
   }
   @media (min-width: $tablet) {}
   @media (min-width: $desktop) {}
@@ -76,6 +77,45 @@
     text-decoration: none;
   }
 
+  @media (min-width: $tablet) {}
+  @media (min-width: $desktop) {}
+}
+
+//BASE FORM
+form {
+  display: flex;
+  flex-flow: column wrap;
+  input {
+    width: 90%;
+    margin: 1px auto;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+  select {
+    width: 93%;
+    margin: 2px auto;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+  button {
+    width: 85%;
+    background: #958adb;
+    margin: 10px auto;
+    font-size: 3.0rem;
+    border-radius: 15px;
+    border: 1px solid black;
+    color: white;
+    font-family: 'Arizonia', cursive;
+  }
+  div{
+    display: flex;
+    width: 94%;
+    margin: 1px auto;
+    select {
+      width: 33%;
+      margin: 2px;
+    }
+  }
   @media (min-width: $tablet) {}
   @media (min-width: $desktop) {}
 }
