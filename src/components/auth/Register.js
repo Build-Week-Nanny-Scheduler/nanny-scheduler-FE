@@ -1,29 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import { useInput } from "../../hooks/useInput";
 import * as Yup from "yup";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import axios from "axios";
-const RegisterFrom = ({ values, errors, touched }, props) => {
+import history from "../../history";
+
+const RegisterFrom = ({ values, errors, touched }) => {
   const [registerForm, setRegisterForm] = useState([]);
   const [firstName, setFirstName, handleFirstName] = useInput("");
   const [lastName, setLastName, handleLastName] = useInput("");
   const [username, setUsername, handleUsername] = useInput("");
   const [password, setPassword, handlePassWord] = useInput("");
   const [city, setCity, handleCity] = useInput("");
-  const [userResidence, setUserResidence, handleUserResidence] = useInput("");
+  const [state, setState, handleState] = useInput("");
 
   const handleSubmit = e => {
-    console.log(firstName);
     e.preventDefault();
     axiosWithAuth()
-      .post("/auth/register", [
-        { firstName, lastName, username, password, city, userResidence }
-      ])
+      .post("/auth/register", {
+        firstName,
+        lastName,
+        username,
+        password,
+        city,
+        state
+      })
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        props.history.push("/dashboard");
+      })
+      .then(res => {
+        history.push("/dashboard");
+      })
+      .catch(err => {
+        console.log(err.response);
       });
   };
   return (
@@ -77,8 +88,8 @@ const RegisterFrom = ({ values, errors, touched }, props) => {
         <Field
           as="select"
           name="state"
-          value={userResidence}
-          onChange={e => handleUserResidence(e.target.value)}
+          value={state}
+          onChange={e => handleState(e.target.value)}
         >
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
