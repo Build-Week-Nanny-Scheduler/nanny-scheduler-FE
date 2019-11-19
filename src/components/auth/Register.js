@@ -29,9 +29,7 @@ const RegisterFrom = ({ values, errors, touched }) => {
       })
       .then(res => {
         localStorage.setItem("token", res.data.token);
-      })
-      .then(res => {
-        history.push("/dashboard");
+        window.location.href = "/dashboard";
       })
       .catch(err => {
         console.log(err.response);

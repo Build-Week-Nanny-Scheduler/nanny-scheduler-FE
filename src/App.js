@@ -8,6 +8,8 @@ import Home from "./components/layout/Home";
 import { CreateRequest } from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
 import Dashboard from "./components/layout/Dashboard";
+import { NannyProvider } from "./contexts/nannyContext";
+import { RequestProvider } from "./contexts/requestContext";
 
 import { NannyProvider } from "./contexts/nannyContext";
 import { RequestProvider } from "./contexts/requestContext";
@@ -25,6 +27,7 @@ function App() {
       App
       <Route exact path="/menu" component={Navigation} />
       <Route exact path="/" component={Home} />
+
       <Route path="/findthisaplace" component={CreateRequest} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />

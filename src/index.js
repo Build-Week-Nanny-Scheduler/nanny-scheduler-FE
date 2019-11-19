@@ -10,8 +10,8 @@ import { Provider } from "react-redux";
 import history from "./history";
 
 ReactDOM.render(
-  <Router history={history} forceRefresh={true}>
-    <App />
+  <Router>
+    <App history={history} />
   </Router>,
   document.getElementById("root")
 );
