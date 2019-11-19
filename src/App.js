@@ -24,12 +24,11 @@ function App() {
       App
       <Route exact path="/menu" component={Navigation} />
       <Route exact path="/" component={Home} />
+      <Route path="/findthisaplace" component={CreateRequest} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
       <NannyProvider>
-        <RequestProvider>
-          <Route path="/dashboard" component={Dashboard} />
-        </RequestProvider>
+        <Route path="/dashboard" component={Dashboard} />
       </NannyProvider>
     </div>
   );
