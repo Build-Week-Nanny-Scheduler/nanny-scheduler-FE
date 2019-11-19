@@ -34,8 +34,48 @@ export const NannyProvider = props => {
   console.log(nannyList);
 
   return (
+<<<<<<< HEAD
+=======
+    <>
+    {nannyList.map(item => (
+        <>
+        <div key={item.id} className="nannyCard">
+          <h2>Nanny {item.firstName} {item.lastName}</h2>
+          <div key={item.id} className="card2Grid">
+            <div>Available:</div><div>{item.Available}</div>
+            <div>Can Drive:</div><div>{item.canDrive}</div>
+            <div>Location:</div><div>{item.city}, {item.state}</div>
+            <div>Rate:</div><div>{item.rates}</div>
+            <div>Services:</div><div>{item.services}</div>
+          </div>
+        </div>
+        </>
+      ))}
+
+
+
+>>>>>>> ba21102cfb5aea7cbff8d2f5a31d675d3b13f3dd
     <NannyContext.Provider value={[nannyList, setNannyList]}>
       {props.children}
     </NannyContext.Provider>
   );
 };
+<<<<<<< HEAD
+=======
+
+
+/*
+  Available: null
+​   canDrive: null
+​​  city: null
+  ​​firstName: "Amberly"
+​​id: 1
+​​isNanny: null
+​​  lastName: "Soren"
+​​password: "$2a$10$7VBuCeGOUh6.SYut5AtPvOasz6KpEwQ3pDZU9vyenlfoU9bxTXi.a"
+​​  rates: null
+​​services: null
+​​state: null
+​​username: "Amberly"
+*/
+>>>>>>> ba21102cfb5aea7cbff8d2f5a31d675d3b13f3dd
