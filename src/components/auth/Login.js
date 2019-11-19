@@ -3,18 +3,49 @@ import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import { useInput } from "../../hooks/useInput";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-const LoginFrom = ({ values, errors, touched }) => {
-  const [loginForm, setLoginForm] = useState([]);
+const LoginFrom = ({ values, errors, touched, props }) => {
+  const [username, setUsername, handleUsername] = useInput();
+  const [password, setPassword, handlePassword] = useInput();
+
+  console.log(props);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/auth/login", { username, password })
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        console.log("logged in");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
     <>
-      <Form>
-        <Field type="text" name="username" placeholder="Your Username" />
+      <Form onSubmit={e => handleSubmit(e)}>
+        <Field
+          type="text"
+          name="username"
+          placeholder="Your Username"
+          value={username}
+          onChange={e => handleUsername(e.target.value)}
+        />
         {touched.username && errors.username && <p>{errors.username}</p>}
 
-        <Field type="password" name="password" placeholder="Your Password" />
+        <Field
+          type="password"
+          name="password"
+          placeholder="Your Password"
+          value={password}
+          onChange={e => handlePassword(e.target.value)}
+        />
         {touched.password && errors.password && <p>{errors.password}</p>}
+        <button type="submit">Submit</button>
       </Form>
       <p>Don't Have an Account?</p>
       <Link to="/register">Sign Up</Link>

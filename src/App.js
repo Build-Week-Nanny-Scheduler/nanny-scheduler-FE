@@ -9,7 +9,7 @@ import { CreateRequest } from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
 import Dashboard from "./components/layout/Dashboard";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <Link to="/menu">
@@ -18,7 +18,6 @@ function App() {
       App
       <Route exact path="/menu" component={Navigation} />
       <Route exact path="/" component={Home} />
-      <Route path="/" component={CreateRequest} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
       <Route path="/dashboard" component={Dashboard} />
