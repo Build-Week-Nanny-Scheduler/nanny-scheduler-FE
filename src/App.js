@@ -27,9 +27,9 @@ function App() {
       <Route path="/findthisaplace" component={CreateRequest} />
       <Route path="/register" component={RegisterFromFormik} />
       <Route path="/login" component={LoginFromFormik} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/nanny" component={NannyProvider} />
-      <RequestProvider />
+      <NannyProvider>
+        <Route path="/dashboard" component={Dashboard} />
+      </NannyProvider>
     </div>
   );
 }
