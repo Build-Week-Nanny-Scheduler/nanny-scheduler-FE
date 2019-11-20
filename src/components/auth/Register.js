@@ -86,6 +86,12 @@ const RegisterFrom = ({ values, errors, touched, status, history }) => {
           <option value="Wyoming">Wyoming</option>
         </Field>
         {touched.state && <p>{errors.state}</p>}
+        <h3>Are you a Nanny?</h3>
+        <Field as="select" name="isNanny">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </Field>
+        {touched.isNanny && <p>{errors.isNanny}</p>}
 
         <button type="submit">Submit</button>
       </Form>
@@ -99,14 +105,23 @@ const RegisterFrom = ({ values, errors, touched, status, history }) => {
 };
 
 export const RegisterFromFormik = withFormik({
-  mapPropsToValues({ firstName, lastName, username, password, city, state }) {
+  mapPropsToValues({
+    firstName,
+    lastName,
+    username,
+    password,
+    city,
+    state,
+    isNanny
+  }) {
     return {
       firstName: firstName || "",
       lastName: lastName || "",
       username: username || "",
       password: password || "",
       city: city || "",
-      state: state || ""
+      state: state || "",
+      isNanny: isNanny || ""
     };
   },
   validationSchema: Yup.object().shape({
@@ -115,7 +130,8 @@ export const RegisterFromFormik = withFormik({
     username: Yup.string().required(),
     password: Yup.string().required(),
     city: Yup.string().required(),
-    state: Yup.string().required()
+    state: Yup.string().required(),
+    isNanny: Yup.bool().required()
   }),
   handleSubmit(values, { setStatus }) {
     axiosWithAuth()
