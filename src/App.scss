@@ -230,9 +230,15 @@ form {
           padding: 0.12em 0;
         }
       }
-      a div{
-        text-align: center;
+      button {
+        width: 85%;
         background: $maincolor2;
+        margin: 10px auto;
+        font-size: 3.0rem;
+        border-radius: 15px;
+        border: 1px solid black;
+        color: white;
+        font-family: 'Arizonia', cursive;
       }
     }
   }

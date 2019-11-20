@@ -20,7 +20,7 @@ const NannyList = () => {
             <div>Rate:</div><div>{item.rates ? item.rates : "Ask Me"}</div>
             <div>Services:</div><div>{item.services ? item.services : "Ask Me"}</div>
           </div>
-          <Link className="otherLink" to="#"><div>Request</div></Link>
+          <button className="otherLink" to="#">Request</button>
         </div>
       ))}
     </>
