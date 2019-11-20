@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Dashboard from "../components/layout/Dashboard";
 
 export const NannyContext = createContext();
 //this is context api; it's a state management tool that allows us to pass state freely between components without having to prop drill. everything wrapped in <NannyProvider> tags in the app.js will have access to the state held within this file

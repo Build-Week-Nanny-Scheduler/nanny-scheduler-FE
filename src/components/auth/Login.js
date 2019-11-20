@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useInput } from "../../hooks/useInput";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { UserTokenContext } from "../../contexts/userTokenContext";
 
-const LoginFrom = ({ values, errors, touched }) => {
+const LoginFrom = ({ values, errors, touched, history }) => {
   const [username, setUsername, handleUsername] = useInput();
   const [password, setPassword, handlePassword] = useInput();
+  const [decodedToken, setDecodedToken] = useContext(UserTokenContext);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -16,11 +18,29 @@ const LoginFrom = ({ values, errors, touched }) => {
       .post("/auth/login", { username, password })
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        window.location.href = "/dashboard";
+        handleToken(res.data.token);
+      })
+      .then(res => {
+        history.push("/dashboard");
       })
       .catch(error => {
         console.log(error);
       });
+  };
+
+  const handleToken = token => {
+    let base64Url = token.split(".")[1];
+    let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    let jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function(c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    setDecodedToken(jsonPayload);
   };
 
   return (

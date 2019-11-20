@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import { useInput } from "../../hooks/useInput";
@@ -6,11 +6,10 @@ import * as Yup from "yup";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import axios from "axios";
 import history from "../../history";
+import { UserTokenContext } from "../../contexts/userTokenContext";
 
-const RegisterFrom = ({ values, errors, touched }) => {
-  const [registerForm, setRegisterForm] = useState([]);
-  const [isNanny, setIsNanny] = useState(false);
-
+const RegisterFrom = ({ values, errors, touched, history }) => {
+  const [decodedToken, setDecodedToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -22,8 +21,23 @@ const RegisterFrom = ({ values, errors, touched }) => {
     rates: "",
     Available: "",
     canDrive: false,
-    isNanny: isNanny
+    isNanny: false
   });
+
+  const handleToken = token => {
+    let base64Url = token.split(".")[1];
+    let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    let jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function(c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    setDecodedToken(jsonPayload);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -32,7 +46,10 @@ const RegisterFrom = ({ values, errors, touched }) => {
       .post("/auth/register", userInfo)
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        window.location.href = "/dashboard";
+        handleToken(res.data.token);
+      })
+      .then(res => {
+        history.push("/dashboard");
       })
       .catch(err => {
         console.log(err.response);
