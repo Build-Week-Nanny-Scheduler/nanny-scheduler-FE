@@ -122,31 +122,37 @@
 
 //Create Request Page
 .createRequestPage {
+  h1 {
+    margin: 0.15em 0 0 0.05em;
+    padding: 0;
+  }
   @media (min-width: $tablet) {}
   @media (min-width: $desktop) {}
 }
 
 //Register Page
 .registerPage {
-  .otherLink div {
-    width: 85%;
-    background: $maincolor;
-    margin: 10px auto;
-    font-size: 3.0rem;
-    border-radius: 15px;
-    border: 1px solid black;
-    color: white;
-    font-family: 'Arizonia', cursive;
-  }
   @media (min-width: $tablet) {}
   @media (min-width: $desktop) {}
 }
 
+//OTHER LINKS to buttons
+.otherLink div {
+  width: 85%;
+  background: $maincolor;
+  margin: 10px auto;
+  font-size: 3.0rem;
+  border-radius: 15px;
+  border: 1px solid black;
+  color: white;
+  font-family: 'Arizonia', cursive;
+}
 
 //BASE FORM
 form {
   display: flex;
   flex-flow: column wrap;
+  margin-top: 12px;
   input {
     width: 90%;
     margin: 1px auto;
