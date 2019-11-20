@@ -13,13 +13,25 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
         <h1>Create a Request</h1>
       </div>
       <Form>
-        <Field type="text" name="city" placeholder="Your City" />
-        {touched.city && errors.city && <p>{errors.city}</p>}
+        <Field type="text" name="numberOfKids" placeholder="How Many Kids" />
+        {touched.numberOfKids && errors.numberOfKids && (
+          <p>{errors.numberOfKids}</p>
+        )}
+
+        <Field type="text" name="kidsAge" placeholder="Age of Kid(s)" />
+        {touched.kidsAge && <p>{errors.kidsAge}</p>}
 
         <Field
-          as="select"
-          name="state"
-        >
+          type="text"
+          name="timeNeeded"
+          placeholder="Time needed? Be specific (ex: 5pm - 7pm monday - friday)"
+        />
+        {touched.timeNeeded && <p>{errors.timeNeeded}</p>}
+
+        <Field type="text" name="city" placeholder="Your City" />
+        {touched.city && <p>{errors.city}</p>}
+
+        <Field as="select" name="state">
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
@@ -74,14 +86,9 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
         </Field>
         {touched.state && errors.state && <p>{errors.state}</p>}
 
-        <Field type="text" name="numberOfKids" placeholder="How Many Kids" />
-        {touched.numberOfKids && errors.numberOfKids && <p>{errors.numberOfKids}</p>}
-
-        <Field type="text" name="kidsAge" placeholder="Age of Kid(s)" />
-        {touched.kidsAge && errors.kidsAge && <p>{errors.kidsAge}</p>}
         {/*HOw do we deal with more than one age, when more than one kid?*/}
 
-        <label>
+        {/* <label>
           Start Time:
         </label>
         <div>
@@ -311,28 +318,22 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
           {touched.endAMPM && errors.endAMPM && <p>{errors.endAMPM}</p>}
         </div>
 
-
+ */}
 
         <button type="submit">Submit</button>
-
       </Form>
     </>
   );
 };
 
 export const CreateRequest = withFormik({
-  mapPropsToValues({ city, state, numberOfKids, kidsAge, startTimeH, startTimeM, startAMPM, endTimeH, endTimeM, endAMPM }) {
+  mapPropsToValues({ city, state, numberOfKids, kidsAge, timeNeeded }) {
     return {
       city: city || "",
       state: state || "",
       numberOfKids: numberOfKids || "",
       kidsAge: kidsAge || "",
-      startTimeH: startTimeH || "",
-      startTimeM: startTimeM || "",
-      startAMPM: startTimeH || "",
-      endTimeH: startTimeH || "",
-      endTimeM: startTimeM || "",
-      endAMPM: startTimeH || "",
+      timeNeeded: timeNeeded || ""
     };
   },
   validationSchema: Yup.object().shape({
@@ -340,15 +341,9 @@ export const CreateRequest = withFormik({
     state: Yup.string().required(),
     numberOfKids: Yup.string().required(),
     kidsAge: Yup.string().required(),
-    startTimeH: Yup.string().required(),
-    startTimeM: Yup.string().required(),
-    startAMPM: Yup.string().required(),
-    endTimeH: Yup.string().required(),
-    endTimeM: Yup.string().required(),
-    endAMPM: Yup.string().required(),
+    timeNeeded: Yup.string().required()
   })
 })(CreateRequestFrom);
-
 
 /*
 data needed for creating a request:

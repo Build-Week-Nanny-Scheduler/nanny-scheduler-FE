@@ -8,11 +8,16 @@ export const NannyContext = createContext();
 export const NannyProvider = props => {
   const [nannyList, setNannyList] = useState([]);
 
+  const checkNanny = user => {
+    return user.isNanny === true;
+  };
+
   useEffect(() => {
     axiosWithAuth()
       .get("/users")
       .then(response => {
-        setNannyList(response.data);
+        const nannies = response.data.filter(checkNanny);
+        setNannyList(nannies);
         console.log(nannyList);
       })
       .catch();
