@@ -88,13 +88,17 @@ const RegisterFrom = ({ values, errors, touched, status, history }) => {
         </Field>
         {touched.state && <p>{errors.state}</p>}
 
-        <button>Sign Up</button>
+        <button type="submit">Submit</button>
       </Form>
 
       <p>Already have an account?</p>
+<<<<<<< HEAD
       <Link className="otherLink" to="/login">
         <div>Log In</div>
       </Link>
+=======
+      <Link to="/login">Log In</Link>
+>>>>>>> c92213f51988d9b1591b5a486ab60d778e0d7b95
     </div>
   );
 };

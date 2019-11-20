@@ -25,7 +25,7 @@ const LoginFrom = ({ values, errors, touched, status, history }) => {
         <button type="submit">Submit</button>
       </Form>
       <p>Don't Have an Account?</p>
-      <Link className="otherLink" to="/login"><div>Sign Up</div></Link>
+      <Link to="/register">Sign Up</Link>
     </>
   );
 };
@@ -40,18 +40,12 @@ export const LoginFromFormik = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string().required(),
     password: Yup.string().required()
-<<<<<<< HEAD
   }),
   handleSubmit(values, { setStatus }) {
-=======
-  })/*,
-  handleSubmit(values, { setUsername, setPassword }) {
->>>>>>> d21266db4dd9357db25516fd7211d10c620fb912
     axiosWithAuth()
       .post("/auth/login", values)
       .then(res => {
         localStorage.setItem("token", res.data.token);
-<<<<<<< HEAD
         const token = res.data.token;
         let base64Url = res.data.token.split(".")[1];
         let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -69,29 +63,9 @@ export const LoginFromFormik = withFormik({
       })
       .then(res => {
         window.location.href = "/dashboard";
-=======
-        handleToken(res.data.token);
-      })
-      .then(res => {
-        history.push("/dashboard");
->>>>>>> d21266db4dd9357db25516fd7211d10c620fb912
       })
       .catch(error => {
         console.log(error);
       });
-<<<<<<< HEAD
   }
-=======
-  */
->>>>>>> d21266db4dd9357db25516fd7211d10c620fb912
 })(LoginFrom);
-
-/*
-to clear things up with regards to the data, we need:
--firstName
--lastName
--username
--password
--city
--state
-*/

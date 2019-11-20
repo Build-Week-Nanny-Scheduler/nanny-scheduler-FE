@@ -3,6 +3,8 @@ import RequestList from "../requests/viewRequests/RequestList";
 import NannyList from "../nanny/NannyList";
 import { UserInfoContext } from "../../contexts/userInfoContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { NannyProvider } from "../../contexts/nannyContext";
+import { RequestProvider } from "../../contexts/requestContext";
 
 const Dashboard = ({ history }) => {
   const [nannyStatus, setNannyStatus] = useState(false);
