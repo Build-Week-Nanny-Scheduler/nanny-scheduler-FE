@@ -13,7 +13,9 @@ import { RequestProvider } from "./contexts/requestContext";
 import { UserTokenProvider } from "./contexts/userTokenContext";
 import PrivateRoute from "./components/PrivateRoute";
 import { UserIDProvider } from "./contexts/userIDContext";
-
+import { UserInfoProvider } from "./contexts/userInfoContext";
+import Profile from "./components/profile/Profile";
+import Logout from "./components/auth/Logout";
 const App = ({ history }) => {
   return (
     <div className="App">
@@ -32,9 +34,13 @@ const App = ({ history }) => {
           <UserTokenProvider>
             <Route path="/register" component={RegisterFromFormik} />
             <Route path="/login" component={LoginFromFormik} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <UserInfoProvider>
+              <PrivateRoute path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="/profile" component={Profile} />
+            </UserInfoProvider>
           </UserTokenProvider>
         </UserIDProvider>
+        <Route path="/logout" component={Logout} />
       </Router>
     </div>
   );

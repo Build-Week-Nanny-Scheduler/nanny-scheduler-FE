@@ -5,20 +5,31 @@ import { NannyProvider } from "../../contexts/nannyContext";
 import { RequestProvider } from "../../contexts/requestContext";
 import { UserTokenContext } from "../../contexts/userTokenContext";
 import { UserIDContext } from "../../contexts/userIDContext";
+import { UserInfoContext } from "../../contexts/userInfoContext";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const Dashboard = ({ history }) => {
   const [nannyStatus, setNannyStatus] = useState(false);
   const [decodedToken, setDecodedToken] = useContext(UserTokenContext);
+  const [userInfo, setUserInfo] = useContext(UserInfoContext);
   const [userID, setUserID] = useContext(UserIDContext);
 
   const token = localStorage.getItem("token");
 
-  if (decodedToken === undefined) {
-    localStorage.clear();
-    console.log("yass");
-  } else {
+  if (decodedToken) {
     setUserID(decodedToken.split(",")[0].split(":")[1]);
   }
+
+  const userIDDecoded = localStorage.getItem("userID");
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/users/${userIDDecoded}`)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch();
+  }, [userID]);
 
   return (
     <div>
