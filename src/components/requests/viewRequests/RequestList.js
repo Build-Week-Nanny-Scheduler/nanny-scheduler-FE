@@ -53,6 +53,7 @@ const RequestList = () => {
             <div>Location:</div><div>{item.city ? item.city : "Ask Me"}, {item.state ? item.state : "Ask Me"}</div>
             <div>Time Needed:</div><div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
           </div>
+          <Link className="otherLink" to="#"><div>Claim</div></Link>
         </div>
       ))}
     </div>

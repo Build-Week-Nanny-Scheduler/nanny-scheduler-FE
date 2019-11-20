@@ -230,6 +230,10 @@ form {
           padding: 0.12em 0;
         }
       }
+      a div{
+        text-align: center;
+        background: $maincolor2;
+      }
     }
   }
   @media (min-width: $tablet) {

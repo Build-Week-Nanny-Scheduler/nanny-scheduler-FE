@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "axios";
+import { Link } from "react-router-dom";
 import { NannyContext } from "../../contexts/nannyContext";
 
 const NannyList = () => {
@@ -19,6 +20,7 @@ const NannyList = () => {
             <div>Rate:</div><div>{item.rates ? item.rates : "Ask Me"}</div>
             <div>Services:</div><div>{item.services ? item.services : "Ask Me"}</div>
           </div>
+          <Link className="otherLink" to="#"><div>Request</div></Link>
         </div>
       ))}
     </>
