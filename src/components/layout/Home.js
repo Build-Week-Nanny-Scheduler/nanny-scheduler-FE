@@ -8,9 +8,10 @@ const Home = ({ history }) => {
   }
   return (
     <div className="homePage">
-      <h1>Nanny in a Flash</h1>
       <Link to="/login">Log In</Link>
       <Link to="/register">Sign Up</Link>
+      <h1>You need an account to use</h1>
+      <p>Nanny in a Flash</p>
     </div>
   );
 };
