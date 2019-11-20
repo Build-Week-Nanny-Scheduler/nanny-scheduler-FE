@@ -7,10 +7,11 @@ const Home = ({ history }) => {
     history.push("/dashboard");
   }
   return (
-    <div>
-      <h1>Nanny in a Flash</h1>
+    <div className="homePage">
       <Link to="/login">Log In</Link>
       <Link to="/register">Sign Up</Link>
+      <h1>You need an account to use</h1>
+      <p>Nanny in a Flash</p>
     </div>
   );
 };

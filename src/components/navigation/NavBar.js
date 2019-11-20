@@ -7,7 +7,8 @@ export const Navigation = () => {
   return (
     <div className="pageMenu">
       <nav className="navBar">
-        <Link to="/">Home</Link>
+        <Link to="/https://eager-meninsky-104020.netlify.com/">Home</Link>
+        <Link to="/">Dashboard</Link>
         <Link to="/createrequest">Create Request</Link>
         {token ? (
           <Link to="/profile">Profile</Link>
