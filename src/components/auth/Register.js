@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
-import { useInput } from "../../hooks/useInput";
+
 import * as Yup from "yup";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import axios from "axios";
 import history from "../../history";
-import { UserTokenContext } from "../../contexts/userTokenContext";
 
 const RegisterFrom = ({ values, errors, touched, status, history }) => {
   const [credentials, setCredentials] = useState([]);
@@ -92,13 +91,9 @@ const RegisterFrom = ({ values, errors, touched, status, history }) => {
       </Form>
 
       <p>Already have an account?</p>
-<<<<<<< HEAD
       <Link className="otherLink" to="/login">
         <div>Log In</div>
       </Link>
-=======
-      <Link to="/login">Log In</Link>
->>>>>>> c92213f51988d9b1591b5a486ab60d778e0d7b95
     </div>
   );
 };
