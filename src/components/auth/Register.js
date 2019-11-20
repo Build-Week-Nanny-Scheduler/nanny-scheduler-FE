@@ -121,7 +121,7 @@ export const RegisterFromFormik = withFormik({
       password: password || "",
       city: city || "",
       state: state || "",
-      isNanny: isNanny || ""
+      isNanny: isNanny || false
     };
   },
   validationSchema: Yup.object().shape({
