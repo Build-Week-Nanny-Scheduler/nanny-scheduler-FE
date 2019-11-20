@@ -56,7 +56,7 @@ const RegisterFrom = ({ values, errors, touched, history }) => {
       });
   };
   return (
-    <div>
+    <div className="registerPage">
       <Form onSubmit={e => handleSubmit(e)}>
         <Field
           type="text"
@@ -175,11 +175,11 @@ const RegisterFrom = ({ values, errors, touched, history }) => {
         </Field>
         {touched.state && errors.state && <p>{errors.state}</p>}
 
-        <button type="submit">Submit</button>
+        <button>Sign Up</button>
       </Form>
 
       <p>Already have an account?</p>
-      <Link to="/login">Log In</Link>
+      <Link className="otherLink" to="/login"><div>Log In</div></Link>
     </div>
   );
 };

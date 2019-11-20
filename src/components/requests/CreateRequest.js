@@ -9,8 +9,8 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
 
   return (
     <>
-      <div>
-        <h1>Create Request</h1>
+      <div className="createRequestPage">
+        <h1>Create a Request</h1>
       </div>
       <Form>
         <Field type="text" name="city" placeholder="Your City" />
@@ -81,6 +81,9 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
         {touched.kidsAge && errors.kidsAge && <p>{errors.kidsAge}</p>}
         {/*HOw do we deal with more than one age, when more than one kid?*/}
 
+        <label>
+          Start Time:
+        </label>
         <div>
           <Field
             as="select"
@@ -193,6 +196,9 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
           {touched.startAMPM && errors.startAMPM && <p>{errors.startAMPM}</p>}
         </div>
 
+        <label>
+          End Time:
+        </label>
         <div>
           <Field
             as="select"

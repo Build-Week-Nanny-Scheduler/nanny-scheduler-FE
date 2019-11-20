@@ -30,7 +30,7 @@ const App = ({ history }) => {
         <Route exact path="/menu" component={Navigation} />
         <Route exact path="/" component={Home} />
         <UserIDProvider>
-          <Route path="/findthisaplace" component={CreateRequest} />
+          <Route path="/createrequest" component={CreateRequest} />
           <UserTokenProvider>
             <Route path="/register" component={RegisterFromFormik} />
             <Route path="/login" component={LoginFromFormik} />
@@ -41,6 +41,11 @@ const App = ({ history }) => {
           </UserTokenProvider>
         </UserIDProvider>
         <Route path="/logout" component={Logout} />
+
+        <Route path='/https://eager-meninsky-104020.netlify.com/' component={() => {
+           window.location.href = 'https://eager-meninsky-104020.netlify.com/'; 
+           return null;
+         }}/>
       </Router>
     </div>
   );
