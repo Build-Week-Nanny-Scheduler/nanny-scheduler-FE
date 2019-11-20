@@ -8,11 +8,7 @@ import Home from "./components/layout/Home";
 import { CreateRequest } from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
 import Dashboard from "./components/layout/Dashboard";
-import { NannyProvider } from "./contexts/nannyContext";
-import { RequestProvider } from "./contexts/requestContext";
-import { UserTokenProvider } from "./contexts/userTokenContext";
 import PrivateRoute from "./components/PrivateRoute";
-import { UserIDProvider } from "./contexts/userIDContext";
 import { UserInfoProvider } from "./contexts/userInfoContext";
 import Profile from "./components/profile/Profile";
 import Logout from "./components/auth/Logout";
@@ -29,23 +25,22 @@ const App = ({ history }) => {
         </Link>
         <Route exact path="/menu" component={Navigation} />
         <Route exact path="/" component={Home} />
-        <UserIDProvider>
-          <Route path="/createrequest" component={CreateRequest} />
-          <UserTokenProvider>
-            <Route path="/register" component={RegisterFromFormik} />
-            <Route path="/login" component={LoginFromFormik} />
-            <UserInfoProvider>
-              <PrivateRoute path="/dashboard" component={Dashboard} />
-              <PrivateRoute path="/profile" component={Profile} />
-            </UserInfoProvider>
-          </UserTokenProvider>
-        </UserIDProvider>
+        <Route path="/findthisaplace" component={CreateRequest} />
+        <Route path="/register" component={RegisterFromFormik} />
+        <Route path="/login" component={LoginFromFormik} />
+        <UserInfoProvider>
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/profile" component={Profile} />
+        </UserInfoProvider>
         <Route path="/logout" component={Logout} />
 
-        <Route path='/https://eager-meninsky-104020.netlify.com/' component={() => {
-           window.location.href = 'https://eager-meninsky-104020.netlify.com/'; 
-           return null;
-         }}/>
+        <Route
+          path="/https://eager-meninsky-104020.netlify.com/"
+          component={() => {
+            window.location.href = "https://eager-meninsky-104020.netlify.com/";
+            return null;
+          }}
+        />
       </Router>
     </div>
   );

@@ -3,9 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useInput } from "../../hooks/useInput";
+
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
-import { UserTokenContext } from "../../contexts/userTokenContext";
 
 const LoginFrom = ({ values, errors, touched, status, history }) => {
   const [credentials, setCredentials] = useState([]);
@@ -69,13 +68,3 @@ export const LoginFromFormik = withFormik({
       });
   }
 })(LoginFrom);
-
-/*
-to clear things up with regards to the data, we need:
--firstName
--lastName
--username
--password
--city
--state
-*/
