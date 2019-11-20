@@ -33,6 +33,14 @@ const App = ({ history }) => {
           <PrivateRoute path="/profile" component={Profile} />
         </UserInfoProvider>
         <Route path="/logout" component={Logout} />
+
+        <Route
+          path="/https://eager-meninsky-104020.netlify.com/"
+          component={() => {
+            window.location.href = "https://eager-meninsky-104020.netlify.com/";
+            return null;
+          }}
+        />
       </Router>
     </div>
   );

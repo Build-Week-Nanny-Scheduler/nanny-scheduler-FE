@@ -88,11 +88,13 @@ const RegisterFrom = ({ values, errors, touched, status, history }) => {
         </Field>
         {touched.state && <p>{errors.state}</p>}
 
-        <button type="submit">Submit</button>
+        <button>Sign Up</button>
       </Form>
 
       <p>Already have an account?</p>
-      <Link to="/login">Log In</Link>
+      <Link className="otherLink" to="/login">
+        <div>Log In</div>
+      </Link>
     </div>
   );
 };
