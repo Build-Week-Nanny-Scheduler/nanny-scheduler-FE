@@ -9,9 +9,10 @@ export const UserTokenProvider = props => {
   const [decodedToken, setDecodedToken] = useState();
 
   useEffect(() => {
-    decodedToken
-      ? console.log("User ID: ", decodedToken.split(",")[0].split(":")[1])
-      : console.log("no token");
+    if (decodedToken) {
+      const userID = decodedToken.split(",")[0].split(":")[1];
+      localStorage.setItem("userID", userID);
+    }
   }, [decodedToken]);
 
   return (
