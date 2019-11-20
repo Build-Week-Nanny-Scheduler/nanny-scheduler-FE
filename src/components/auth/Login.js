@@ -7,7 +7,7 @@ import { useInput } from "../../hooks/useInput";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { UserTokenContext } from "../../contexts/userTokenContext";
 
-const LoginFrom = ({ values, errors, touched, history, status }) => {
+const LoginFrom = ({ values, errors, touched, history}) => {
   const [username, setUsername, handleUsername] = useInput();
   const [password, setPassword, handlePassword] = useInput();
   const [decodedToken, setDecodedToken] = useContext(UserTokenContext);
@@ -55,6 +55,8 @@ const LoginFrom = ({ values, errors, touched, history, status }) => {
           type="text"
           name="username"
           placeholder="Your Username"
+          value={username}
+          onChange={e => handleUsername(e.target.value)}
         />
         {touched.username && errors.username && <p>{errors.username}</p>}
 
@@ -62,6 +64,8 @@ const LoginFrom = ({ values, errors, touched, history, status }) => {
           type="password"
           name="password"
           placeholder="Your Password"
+          value={password}
+          onChange={e => handlePassword(e.target.value)}
         />
         {touched.password && errors.password && <p>{errors.password}</p>}
         <button>Sign In</button>
@@ -82,8 +86,8 @@ export const LoginFromFormik = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string().required(),
     password: Yup.string().required()
-  }),
-/*  handleSubmit(values, { setUsername, setPassword }) {
+  })/*,
+  handleSubmit(values, { setUsername, setPassword }) {
     axiosWithAuth()
       .post("/auth/login", values)
       .then(res => {
