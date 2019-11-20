@@ -9,9 +9,8 @@ export const RequestProvider = props => {
   useEffect(() => {
     axiosWithAuth()
       .get("/requests/all")
-      .then(async res => {
-        await setRequestList(res.data);
-        console.log(requestList);
+      .then(res => {
+        setRequestList(res.data);
       })
       .catch();
   }, []);

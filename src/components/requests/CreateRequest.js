@@ -3,16 +3,54 @@ import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const CreateRequestFrom = ({ values, errors, touched }) => {
   const [requestForm, setRequestForm] = useState([]);
+  const [nannyInfo, setNannyInfo] = useState({});
+  const [flag, setFlag] = useState(false);
+
+  const link = window.location.href;
+
+  let nannyUserID = link.match(/\/\b\d+\/\b/g);
+
+  nannyUserID = nannyUserID[0].split("/")[1];
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/users/${nannyUserID}`)
+      .then(
+        response => {
+          console.log(response.data);
+          setNannyInfo(response.data);
+        },
+        [flag]
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  }, [flag]);
 
   return (
     <>
       <div className="createRequestPage">
-        <h1>Create a Request</h1>
+        <h1>Schedule {nannyInfo.firstName}</h1>
       </div>
       <Form>
+        <Field
+          type="text"
+          name="nannyUserID"
+          placeholder=""
+          type="hidden"
+          value={nannyUserID}
+        />
+        <Field
+          type="text"
+          name="accepted"
+          placeholder=""
+          type="hidden"
+          value="false"
+        />
         <Field type="text" name="numberOfKids" placeholder="How Many Kids" />
         {touched.numberOfKids && errors.numberOfKids && (
           <p>{errors.numberOfKids}</p>
@@ -327,8 +365,18 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
 };
 
 export const CreateRequest = withFormik({
-  mapPropsToValues({ city, state, numberOfKids, kidsAge, timeNeeded }) {
+  mapPropsToValues({
+    city,
+    state,
+    numberOfKids,
+    kidsAge,
+    timeNeeded,
+    nannyUserID,
+    accepted
+  }) {
     return {
+      accepted: accepted || false,
+      nannyUserID: nannyUserID || "",
       city: city || "",
       state: state || "",
       numberOfKids: numberOfKids || "",
@@ -337,12 +385,24 @@ export const CreateRequest = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
+    accepted: Yup.bool().required(),
+    nannyUserID: Yup.string().required(),
     city: Yup.string().required(),
     state: Yup.string().required(),
     numberOfKids: Yup.string().required(),
     kidsAge: Yup.string().required(),
     timeNeeded: Yup.string().required()
-  })
+  }),
+  handleSubmit(values, { setStatus }) {
+    axiosWithAuth()
+      .post("/requests", values)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 })(CreateRequestFrom);
 
 /*
