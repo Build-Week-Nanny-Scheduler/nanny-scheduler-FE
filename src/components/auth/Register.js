@@ -9,24 +9,27 @@ import history from "../../history";
 
 const RegisterFrom = ({ values, errors, touched }) => {
   const [registerForm, setRegisterForm] = useState([]);
-  const [firstName, setFirstName, handleFirstName] = useInput("");
-  const [lastName, setLastName, handleLastName] = useInput("");
-  const [username, setUsername, handleUsername] = useInput("");
-  const [password, setPassword, handlePassWord] = useInput("");
-  const [city, setCity, handleCity] = useInput("");
-  const [state, setState, handleState] = useInput("");
+  const [isNanny, setIsNanny] = useState(false);
+
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    city: "",
+    state: "",
+    services: "",
+    rates: "",
+    Available: "",
+    canDrive: false,
+    isNanny: isNanny
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log(userInfo);
     axiosWithAuth()
-      .post("/auth/register", {
-        firstName,
-        lastName,
-        username,
-        password,
-        city,
-        state
-      })
+      .post("/auth/register", userInfo)
       .then(res => {
         localStorage.setItem("token", res.data.token);
         window.location.href = "/dashboard";
@@ -42,8 +45,10 @@ const RegisterFrom = ({ values, errors, touched }) => {
           type="text"
           name="firstName"
           placeholder="First Name"
-          value={firstName}
-          onChange={e => handleFirstName(e.target.value)}
+          value={userInfo.firstName}
+          onChange={e =>
+            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+          }
         />
         {touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
 
@@ -51,8 +56,10 @@ const RegisterFrom = ({ values, errors, touched }) => {
           type="text"
           name="lastName"
           placeholder="Last Name"
-          value={lastName}
-          onChange={e => handleLastName(e.target.value)}
+          value={userInfo.lastName}
+          onChange={e =>
+            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+          }
         />
         {touched.lastName && errors.lastName && <p>{errors.lastName}</p>}
 
@@ -60,8 +67,10 @@ const RegisterFrom = ({ values, errors, touched }) => {
           type="text"
           name="username"
           placeholder="Your Username"
-          value={username}
-          onChange={e => handleUsername(e.target.value)}
+          value={userInfo.username}
+          onChange={e =>
+            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+          }
         />
         {touched.username && errors.username && <p>{errors.username}</p>}
 
@@ -69,8 +78,10 @@ const RegisterFrom = ({ values, errors, touched }) => {
           type="password"
           name="password"
           placeholder="Your Password"
-          value={password}
-          onChange={e => handlePassWord(e.target.value)}
+          value={userInfo.password}
+          onChange={e =>
+            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+          }
         />
         {touched.password && errors.password && <p>{errors.password}</p>}
 
@@ -78,16 +89,20 @@ const RegisterFrom = ({ values, errors, touched }) => {
           type="text"
           name="city"
           placeholder="Your City"
-          value={city}
-          onChange={e => handleCity(e.target.value)}
+          value={userInfo.city}
+          onChange={e =>
+            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+          }
         />
         {touched.city && errors.city && <p>{errors.city}</p>}
 
         <Field
           as="select"
           name="state"
-          value={state}
-          onChange={e => handleState(e.target.value)}
+          value={userInfo.state}
+          onChange={e =>
+            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+          }
         >
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
