@@ -8,119 +8,32 @@ import axios from "axios";
 import history from "../../history";
 import { UserTokenContext } from "../../contexts/userTokenContext";
 
-const RegisterFrom = ({ values, errors, touched, history }) => {
-  const [decodedToken, setDecodedToken] = useContext(UserTokenContext);
-  const [userInfo, setUserInfo] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    password: "",
-    city: "",
-    state: "",
-    services: "",
-    rates: "",
-    Available: "",
-    canDrive: false,
-    isNanny: false
-  });
+const RegisterFrom = ({ values, errors, touched, status, history }) => {
+  const [credentials, setCredentials] = useState([]);
 
-  const handleToken = token => {
-    let base64Url = token.split(".")[1];
-    let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    let jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function(c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
+  useEffect(() => {
+    status && setCredentials(credentials => [...credentials, status]);
+  }, [status]);
 
-    setDecodedToken(jsonPayload);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(userInfo);
-    axiosWithAuth()
-      .post("/auth/register", userInfo)
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        handleToken(res.data.token);
-      })
-      .then(res => {
-        history.push("/dashboard");
-      })
-      .catch(err => {
-        console.log(err.response);
-      });
-  };
   return (
     <div>
-      <Form onSubmit={e => handleSubmit(e)}>
-        <Field
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          value={userInfo.firstName}
-          onChange={e =>
-            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
-          }
-        />
-        {touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
+      <Form>
+        <Field type="text" name="firstName" placeholder="First Name" />
+        {touched.firstName && <p>{errors.firstName}</p>}
 
-        <Field
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-          value={userInfo.lastName}
-          onChange={e =>
-            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
-          }
-        />
-        {touched.lastName && errors.lastName && <p>{errors.lastName}</p>}
+        <Field type="text" name="lastName" placeholder="Last Name" />
+        {touched.lastName && <p>{errors.lastName}</p>}
 
-        <Field
-          type="text"
-          name="username"
-          placeholder="Your Username"
-          value={userInfo.username}
-          onChange={e =>
-            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
-          }
-        />
-        {touched.username && errors.username && <p>{errors.username}</p>}
+        <Field type="text" name="username" placeholder="Your Username" />
+        {touched.username && <p>{errors.username}</p>}
 
-        <Field
-          type="password"
-          name="password"
-          placeholder="Your Password"
-          value={userInfo.password}
-          onChange={e =>
-            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
-          }
-        />
-        {touched.password && errors.password && <p>{errors.password}</p>}
+        <Field type="password" name="password" placeholder="Your Password" />
+        {touched.password && <p>{errors.password}</p>}
 
-        <Field
-          type="text"
-          name="city"
-          placeholder="Your City"
-          value={userInfo.city}
-          onChange={e =>
-            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
-          }
-        />
-        {touched.city && errors.city && <p>{errors.city}</p>}
+        <Field type="text" name="city" placeholder="Your City" />
+        {touched.city && <p>{errors.city}</p>}
 
-        <Field
-          as="select"
-          name="state"
-          value={userInfo.state}
-          onChange={e =>
-            setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
-          }
-        >
+        <Field as="select" name="state">
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
@@ -173,7 +86,7 @@ const RegisterFrom = ({ values, errors, touched, history }) => {
           <option value="Wisconsin">Wisconsin</option>
           <option value="Wyoming">Wyoming</option>
         </Field>
-        {touched.state && errors.state && <p>{errors.state}</p>}
+        {touched.state && <p>{errors.state}</p>}
 
         <button type="submit">Submit</button>
       </Form>
@@ -202,7 +115,34 @@ export const RegisterFromFormik = withFormik({
     password: Yup.string().required(),
     city: Yup.string().required(),
     state: Yup.string().required()
-  })
+  }),
+  handleSubmit(values, { setStatus }) {
+    axiosWithAuth()
+      .post("/auth/register", values)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        const token = res.data.token;
+        let base64Url = res.data.token.split(".")[1];
+        let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        let jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map(function(c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+        const userID = jsonPayload.split(",")[0].split(":")[1];
+        console.log(userID);
+        localStorage.setItem("userID", userID);
+      })
+      .then(res => {
+        window.location.href = "/dashboard";
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 })(RegisterFrom);
 
 /*
