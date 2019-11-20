@@ -3,23 +3,73 @@ import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const CreateRequestFrom = ({ values, errors, touched }) => {
   const [requestForm, setRequestForm] = useState([]);
+  const [nannyInfo, setNannyInfo] = useState({});
+  const [flag, setFlag] = useState(false);
+
+  const link = window.location.href;
+
+  let nannyUserID = link.match(/\/\b\d+\/\b/g);
+
+  nannyUserID = nannyUserID[0].split("/")[1];
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/users/${nannyUserID}`)
+      .then(
+        response => {
+          console.log(response.data);
+          setNannyInfo(response.data);
+        },
+        [flag]
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  }, [flag]);
 
   return (
     <>
       <div className="createRequestPage">
-        <h1>Create a Request</h1>
+        <h1>Schedule {nannyInfo.firstName}</h1>
       </div>
       <Form>
-        <Field type="text" name="city" placeholder="Your City" />
-        {touched.city && errors.city && <p>{errors.city}</p>}
+        <Field
+          type="text"
+          name="nannyUserID"
+          placeholder=""
+          type="hidden"
+          value={nannyUserID}
+        />
+        <Field
+          type="text"
+          name="accepted"
+          placeholder=""
+          type="hidden"
+          value="false"
+        />
+        <Field type="text" name="numberOfKids" placeholder="How Many Kids" />
+        {touched.numberOfKids && errors.numberOfKids && (
+          <p>{errors.numberOfKids}</p>
+        )}
+
+        <Field type="text" name="kidsAge" placeholder="Age of Kid(s)" />
+        {touched.kidsAge && <p>{errors.kidsAge}</p>}
 
         <Field
-          as="select"
-          name="state"
-        >
+          type="text"
+          name="timeNeeded"
+          placeholder="Time needed? Be specific (ex: 5pm - 7pm monday - friday)"
+        />
+        {touched.timeNeeded && <p>{errors.timeNeeded}</p>}
+
+        <Field type="text" name="city" placeholder="Your City" />
+        {touched.city && <p>{errors.city}</p>}
+
+        <Field as="select" name="state">
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
@@ -74,14 +124,9 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
         </Field>
         {touched.state && errors.state && <p>{errors.state}</p>}
 
-        <Field type="text" name="numberOfKids" placeholder="How Many Kids" />
-        {touched.numberOfKids && errors.numberOfKids && <p>{errors.numberOfKids}</p>}
-
-        <Field type="text" name="kidsAge" placeholder="Age of Kid(s)" />
-        {touched.kidsAge && errors.kidsAge && <p>{errors.kidsAge}</p>}
         {/*HOw do we deal with more than one age, when more than one kid?*/}
 
-        <label>
+        {/* <label>
           Start Time:
         </label>
         <div>
@@ -311,44 +356,54 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
           {touched.endAMPM && errors.endAMPM && <p>{errors.endAMPM}</p>}
         </div>
 
-
+ */}
 
         <button type="submit">Submit</button>
-
       </Form>
     </>
   );
 };
 
 export const CreateRequest = withFormik({
-  mapPropsToValues({ city, state, numberOfKids, kidsAge, startTimeH, startTimeM, startAMPM, endTimeH, endTimeM, endAMPM }) {
+  mapPropsToValues({
+    city,
+    state,
+    numberOfKids,
+    kidsAge,
+    timeNeeded,
+    nannyUserID,
+    accepted
+  }) {
     return {
+      accepted: accepted || false,
+      nannyUserID: nannyUserID || "",
       city: city || "",
       state: state || "",
       numberOfKids: numberOfKids || "",
       kidsAge: kidsAge || "",
-      startTimeH: startTimeH || "",
-      startTimeM: startTimeM || "",
-      startAMPM: startTimeH || "",
-      endTimeH: startTimeH || "",
-      endTimeM: startTimeM || "",
-      endAMPM: startTimeH || "",
+      timeNeeded: timeNeeded || ""
     };
   },
   validationSchema: Yup.object().shape({
+    accepted: Yup.bool().required(),
+    nannyUserID: Yup.string().required(),
     city: Yup.string().required(),
     state: Yup.string().required(),
     numberOfKids: Yup.string().required(),
     kidsAge: Yup.string().required(),
-    startTimeH: Yup.string().required(),
-    startTimeM: Yup.string().required(),
-    startAMPM: Yup.string().required(),
-    endTimeH: Yup.string().required(),
-    endTimeM: Yup.string().required(),
-    endAMPM: Yup.string().required(),
-  })
+    timeNeeded: Yup.string().required()
+  }),
+  handleSubmit(values, { setStatus }) {
+    axiosWithAuth()
+      .post("/requests", values)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 })(CreateRequestFrom);
-
 
 /*
 data needed for creating a request:
