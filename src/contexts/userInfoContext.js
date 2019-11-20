@@ -7,16 +7,6 @@ export const UserInfoContext = createContext();
 export const UserInfoProvider = props => {
   const [userInfo, setUserInfo] = useState({});
 
-  const userID = localStorage.getItem("userID");
-  useEffect(() => {
-    axiosWithAuth()
-      .get(`/users/${userID}`)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch();
-  }, [userInfo]);
-
   return (
     <UserInfoContext.Provider value={[userInfo, setUserInfo]}>
       {props.children}
