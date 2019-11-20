@@ -7,10 +7,15 @@ import { useInput } from "../../hooks/useInput";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { UserTokenContext } from "../../contexts/userTokenContext";
 
-const LoginFrom = ({ values, errors, touched, history }) => {
+const LoginFrom = ({ values, errors, touched, history, status }) => {
   const [username, setUsername, handleUsername] = useInput();
   const [password, setPassword, handlePassword] = useInput();
   const [decodedToken, setDecodedToken] = useContext(UserTokenContext);
+/*
+  useEffect(() => {
+    status && setUsername(username => [...username, status]);
+  }, [status]);
+*/
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -50,8 +55,6 @@ const LoginFrom = ({ values, errors, touched, history }) => {
           type="text"
           name="username"
           placeholder="Your Username"
-          value={username}
-          onChange={e => handleUsername(e.target.value)}
         />
         {touched.username && errors.username && <p>{errors.username}</p>}
 
@@ -59,11 +62,9 @@ const LoginFrom = ({ values, errors, touched, history }) => {
           type="password"
           name="password"
           placeholder="Your Password"
-          value={password}
-          onChange={e => handlePassword(e.target.value)}
         />
         {touched.password && errors.password && <p>{errors.password}</p>}
-        <button type="submit">Submit</button>
+        <button>Sign In</button>
       </Form>
       <p>Don't Have an Account?</p>
       <Link className="otherLink" to="/login"><div>Sign Up</div></Link>
@@ -81,7 +82,21 @@ export const LoginFromFormik = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string().required(),
     password: Yup.string().required()
-  })
+  }),
+/*  handleSubmit(values, { setUsername, setPassword }) {
+    axiosWithAuth()
+      .post("/auth/login", values)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        handleToken(res.data.token);
+      })
+      .then(res => {
+        history.push("/dashboard");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  */
 })(LoginFrom);
 
 /*
