@@ -25,7 +25,7 @@ const App = ({ history }) => {
         </Link>
         <Route exact path="/menu" component={Navigation} />
         <Route exact path="/" component={Home} />
-        <Route path="/findthisaplace" component={CreateRequest} />
+        <Route path="/createrequest" component={CreateRequest} />
         <Route path="/register" component={RegisterFromFormik} />
         <Route path="/login" component={LoginFromFormik} />
         <UserInfoProvider>
