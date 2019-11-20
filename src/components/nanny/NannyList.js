@@ -6,7 +6,7 @@ const NannyList = () => {
   const [nannyList, setNannyList] = useContext(NannyContext);
   //NannyContext will set nannylist to whatever was returned from your axiosWithAuthCall
   return (
-    <div>
+    <>
       {nannyList.map(item => (
         <div key={item.id} className="nannyCard">
           <h2>
@@ -21,7 +21,7 @@ const NannyList = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

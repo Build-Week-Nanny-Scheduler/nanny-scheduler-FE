@@ -25,18 +25,14 @@ const Profile = () => {
   }, [flag]);
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <h3>{userInfo.username}</h3>
-      <p>
-        {userInfo.firstName} {userInfo.lastName}
-      </p>
-      <p>
-        <em>
-          {userInfo.city}, {userInfo.state}
-        </em>
-      </p>
-      <p>Services offered: {userInfo.services}</p>
+    <div className="profilePage">
+      <h1>Your Profile</h1>
+      <div className="card2Grid">
+        <div>Username:</div><div>{userInfo.username}</div>
+        <div>Name:</div><div>{userInfo.firstName} {userInfo.lastName}</div>
+        <div>Location:</div><div>{userInfo.city}, {userInfo.state}</div>
+        <div>Services offered:</div><div>{userInfo.services}</div>
+      </div>
     </div>
   );
 };

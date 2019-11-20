@@ -13,7 +13,7 @@ export const Navigation = () => {
         {token ? (
           <Link to="/profile">Profile</Link>
         ) : (
-          <Link to="/register">Register</Link>
+          <Link to="/register">Sign Up</Link>
         )}
         {token ? (
           <Link to="/logout">Log Out</Link>
