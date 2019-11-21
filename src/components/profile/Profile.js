@@ -27,6 +27,11 @@ const Profile = () => {
       });
   }, [flag]);
 
+  const changeFlag = () => {
+    setFlag(!flag);
+    setEditing(false);
+  };
+
   return (
     <div className="profilePage">
       <h1>Your Profile</h1>
@@ -42,7 +47,7 @@ const Profile = () => {
           {userInfo.isNanny ? <NannyProfile userInfo={userInfo} /> : null}
         </div>
       ) : (
-        <ProfileEdit userInfo={userInfo} />
+        <ProfileEdit userInfo={userInfo} setFlag={changeFlag} />
       )}
       <button
         onClick={e => {

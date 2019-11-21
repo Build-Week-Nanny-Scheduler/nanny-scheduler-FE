@@ -4,20 +4,21 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import YesNo from "../../components/layout/yesno";
 import States from "../layout/States";
 const ProfileEdit = props => {
-  const { userInfo } = props;
+  const { userInfo, setFlag } = props;
   const [editInfo, setEditInfo] = useState({
-    firstName: "",
-    lastName: "",
-    services: "",
-    rates: "",
-    Available: "",
+    firstName: userInfo.firstName,
+    lastName: userInfo.lastName,
+    services: userInfo.services,
+    rates: userInfo.rates,
+    Available: userInfo.Available,
     canDrive: userInfo.canDrive,
-    city: "",
+    city: userInfo.city,
     state: userInfo.state
   });
 
   const changeHandler = e => {
     setEditInfo({ ...editInfo, [e.target.name]: e.target.value });
+    console.log(editInfo.canDrive);
   };
 
   const userID = localStorage.getItem("userID");
@@ -28,7 +29,7 @@ const ProfileEdit = props => {
       .put(`/users/${userID}`, editInfo)
       .then(() => {
         console.log("success");
-        props.history.push("/profile");
+        setFlag();
       })
       .catch(err => console.log(err));
   };
@@ -81,7 +82,8 @@ const ProfileEdit = props => {
               value={editInfo.canDrive}
               onChange={e => changeHandler(e)}
             >
-              <YesNo />
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </>
         ) : null}

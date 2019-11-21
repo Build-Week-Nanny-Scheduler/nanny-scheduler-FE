@@ -7,7 +7,7 @@ const NannyProfile = props => {
       <p>Services offered: {services}</p>
       <p>Rate: {rates}</p>
       <p>Availability: {Available}</p>
-      <p>Willing to Drive Children: {canDrive}</p>
+      <p>Willing to Drive Children: {canDrive ? "Yes" : "No"}</p>
     </>
   );
 };
