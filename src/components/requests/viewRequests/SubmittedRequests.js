@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { RequestContext } from "../../../contexts/requestContext";
 
-const RequestList = () => {
+const SubmittedRequests = () => {
   const [requestList, setRequestList] = useContext(RequestContext);
   const [loadingText, setLoadingText] = useState("Loading...");
   const [pendingRequests, setPendingRequests] = useState([]);
@@ -34,6 +34,14 @@ const RequestList = () => {
       .catch(err => console.log(err));
   };
 
+  const getNannyName = id => {
+    axiosWithAuth()
+      .get(`/users/${id}`)
+      .then(res => {
+        return res.data.firstName;
+      });
+  };
+
   return (
     <div>
       {!requestList || requestList.length < 1 ? (
@@ -45,7 +53,9 @@ const RequestList = () => {
       ) : (
         pendingRequests.map(item => (
           <div key={item} className="nannyCard">
-            <h2>{item.name} has not responded to this request</h2>
+            <h2>
+              {getNannyName(item.nannyUserID)} has not responded to this request
+            </h2>
             <div key={item.id} className="card2Grid">
               <div>Number Of Kids:</div>
               <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
@@ -90,4 +100,4 @@ const RequestList = () => {
   );
 };
 
-export default RequestList;
+export default SubmittedRequests;
