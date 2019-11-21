@@ -3,6 +3,7 @@ import { UserInfoContext } from "../../contexts/userInfoContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import NannyProfile from "./NannyProfile";
 import ProfileEdit from "./ProfileEdit";
+import SubmittedRequests from "../requests/viewRequests/SubmittedRequests";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserInfoContext);
@@ -46,10 +47,10 @@ const Profile = () => {
       <button
         onClick={e => {
           e.preventDefault();
-          setEditing(true);
+          setEditing(!editing);
         }}
       >
-        EditProfile
+        {editing ? <>Cancel Edit</> : <>EditProfile</>}
       </button>
     </div>
   );

@@ -28,6 +28,7 @@ const ProfileEdit = props => {
       .put(`/users/${userID}`, editInfo)
       .then(() => {
         console.log("success");
+        props.history.push("/profile");
       })
       .catch(err => console.log(err));
   };
@@ -99,6 +100,7 @@ const ProfileEdit = props => {
         >
           <States />
         </select>
+        <button type="submit">Save Edit</button>
       </form>
     </div>
   );
