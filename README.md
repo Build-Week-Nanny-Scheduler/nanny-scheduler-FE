@@ -1,5 +1,4 @@
 # Nanny in a Flash Front-End App
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 [Hosted here](https://nanny-scheduler-fe.anthonykizer88.now.sh/)
 
@@ -7,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Nanny in a Flash helps a busy parent. Between work meetings, PTA meetings, Board meetings, you barely have time for yourself, and when you do, finding that right child care provider can be difficult. That's where Nanny in a Flash comes in. As a parent, you can log in, select a nanny based on availibility, location, or what services they can offer, and then request their services.
 
 ## Setup
-This project has the following dependencies:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and has the following dependencies:
 
 ### [FORMIK](https://jaredpalmer.com/formik/docs/overview#installation)
 ```
