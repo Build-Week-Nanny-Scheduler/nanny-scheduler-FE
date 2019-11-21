@@ -51,6 +51,11 @@ const CreateRequestFrom = ({ history }) => {
   const changeHandler = e => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
+  const submitHandler = e => {
+    e.preventDefault();
+    axiosWithAuth().post("/requests");
+  };
   return (
     <div className="createRequestPage">
       <h1>Schedule {nannyInfo.firstName}</h1>
