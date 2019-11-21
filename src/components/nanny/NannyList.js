@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "axios";
+import { Link } from "react-router-dom";
 
 import { NannyContext } from "../../contexts/nannyContext";
-import { Link } from "react-router-dom";
+import SearchForm from "../SearchForm";
+
 const NannyList = () => {
   const [nannyList, setNannyList] = useContext(NannyContext);
   //NannyContext will set nannylist to whatever was returned from your axiosWithAuthCall
   return (
     <>
+      <SearchForm state={nannyList} setState={setNannyList} slash="/users" />
+
       {nannyList.map(item => (
         <div key={item.id} className="nannyCard">
           <h2>

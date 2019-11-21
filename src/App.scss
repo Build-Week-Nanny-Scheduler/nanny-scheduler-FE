@@ -60,6 +60,19 @@
 @import 'SASS/NavBar';
 @import 'SASS/Home';
 
+//SearchForm.js
+.search {
+  display: flex;
+  align-content: center;
+  input {
+    width: 95%;
+    border-radius: 25px;
+    margin: 5px auto;
+  }
+  @media (min-width: $tablet) {}
+  @media (min-width: $desktop) {}
+}
+
 
 //Create Request Page
 .createRequestPage {
