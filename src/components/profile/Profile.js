@@ -34,31 +34,36 @@ const Profile = () => {
   };
 
   return (
-    <div className="profilePage">
-      <h1>Your Profile</h1>
-      {!editing ? (
-        <div className="card2Grid">
-          <div>Username: {userInfo.username}</div>
-          <div>
-            Name: {userInfo.firstName} {userInfo.lastName}
+    <div className="profileContainer">
+      <div className="profilePage">
+        <h1>Your Profile</h1>
+        {!editing ? (
+          <div className="card2Grid">
+            <div>Username: {userInfo.username}</div>
+            <div>
+              Name: {userInfo.firstName} {userInfo.lastName}
+            </div>
+            <div>
+              Location: {userInfo.city}, {userInfo.state}
+            </div>
+            {userInfo.isNanny ? <NannyProfile userInfo={userInfo} /> : null}
           </div>
-          <div>
-            Location: {userInfo.city}, {userInfo.state}
-          </div>
-          {userInfo.isNanny ? <NannyProfile userInfo={userInfo} /> : null}
-        </div>
-      ) : (
-        <ProfileEdit userInfo={userInfo} setFlag={changeFlag} />
-      )}
-      <button
-        onClick={e => {
-          e.preventDefault();
-          setEditing(!editing);
-        }}
-      >
-        {editing ? <>Cancel Edit</> : <>EditProfile</>}
-      </button>
-      <Link to="/profile/delete">Delete Profile</Link>
+        ) : (
+          <ProfileEdit userInfo={userInfo} setFlag={changeFlag} />
+        )}
+        <button
+          onClick={e => {
+            e.preventDefault();
+            setEditing(!editing);
+          }}
+        >
+          {editing ? <>Cancel Edit</> : <>EditProfile</>}
+        </button>
+        <Link to="/profile/delete">Delete Profile</Link>
+      </div>
+      <div className="submittedRequests">
+        <SubmittedRequests />
+      </div>
     </div>
   );
 };

@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import { RequestContext } from "../../../contexts/requestContext";
 
 const SubmittedRequests = () => {
-  const [requestList, setRequestList] = useContext(RequestContext);
+  const [requestList, setRequestList] = useState();
   const [loadingText, setLoadingText] = useState("Loading...");
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     if (requestList && requestList.length > 0) {
@@ -20,9 +21,43 @@ const SubmittedRequests = () => {
     }
   }, [requestList]);
 
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/requests/all")
+      .then(res => {
+        const requests = res.data;
+        const id = localStorage.getItem("userID");
+        const filteredRequests = requests.filter(
+          request => request.requesterUserID == id
+        );
+        setRequestList(filteredRequests);
+      })
+      .catch();
+  }, [flag]);
+
   setTimeout(() => {
     setLoadingText("No Requests");
   }, 1000);
+
+  const toPending = item => {
+    const id = item.id;
+    axiosWithAuth()
+      .put(`/requests/${id}`, { ...item, accepted: false })
+      .then(res => {
+        console.log(res);
+        setFlag(!flag);
+      });
+  };
+
+  const acceptRequest = item => {
+    const id = item.id;
+    axiosWithAuth()
+      .put(`/requests/${id}`, { ...item, accepted: true })
+      .then(res => {
+        console.log(res);
+        setFlag(!flag);
+      });
+  };
 
   const cancelRequest = item => {
     const id = item.id;
@@ -54,31 +89,8 @@ const SubmittedRequests = () => {
         pendingRequests.map(item => (
           <div key={item} className="nannyCard">
             <h2>
-              {getNannyName(item.nannyUserID)} has not responded to this request
+              {getNannyName(item.nannyUserID)} has not accepted this request yet
             </h2>
-            <div key={item.id} className="card2Grid">
-              <div>Number Of Kids:</div>
-              <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
-              <div>Kids Ages:</div>
-              <div>{item.kidsAges ? item.kidsAges : "Ask Me"}</div>
-              <div>Location:</div>
-              <div>
-                {item.city ? item.city : "Ask Me"},
-                {item.state ? item.state : null}
-              </div>
-              <div>Time Needed:</div>
-              <div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
-            </div>
-          </div>
-        ))
-      )}
-      {!requestList || requestList.length < 1 ? null : acceptedRequests.length <
-        1 ? (
-        <h1>No Accepted Requests</h1>
-      ) : (
-        acceptedRequests.map(item => (
-          <div key={item} className="nannyCard">
-            <h2>{item.name} is scheduled for this request</h2>
             <div key={item.id} className="card2Grid">
               <div>Number Of Kids:</div>
               <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
@@ -92,9 +104,40 @@ const SubmittedRequests = () => {
               <div>Time Needed:</div>
               <div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
             </div>
-            <button onClick={() => cancelRequest(item)}>Cancel Request</button>
+            <button onClick={() => acceptRequest(item)}>Accept</button>
           </div>
         ))
+      )}
+      {!requestList || requestList.length < 1 ? null : acceptedRequests.length <
+        1 ? (
+        <h1>No Accepted Requests</h1>
+      ) : (
+        acceptedRequests.map(
+          item => (
+            console.log(item),
+            (
+              <div key={item} className="nannyCard">
+                <h2>
+                  This job was accepted by {getNannyName(item.nannyUserID)}
+                </h2>
+                <div key={item.id} className="card2Grid">
+                  <div>Number Of Kids:</div>
+                  <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
+                  <div>Kids Ages:</div>
+                  <div>{item.kidsAges ? item.kidsAges : "Ask Me"}</div>
+                  <div>Location:</div>
+                  <div>
+                    {item.city ? item.city : "Ask Me"},{" "}
+                    {item.state ? item.state : "Ask Me"}
+                  </div>
+                  <div>Time Needed:</div>
+                  <div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
+                </div>
+                <button onClick={() => toPending(item)}>Move to Pending</button>
+              </div>
+            )
+          )
+        )
       )}
     </div>
   );

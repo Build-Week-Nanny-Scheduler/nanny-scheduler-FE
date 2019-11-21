@@ -30,7 +30,10 @@ const App = ({ history }) => {
         <Route path="/register" component={RegisterFromFormik} />
         <Route path="/login" component={LoginFromFormik} />
         <UserInfoProvider>
-          <Route path="/:id/requestnanny" component={CreateRequestFrom} />
+          <PrivateRoute
+            path="/:id/requestnanny"
+            component={CreateRequestFrom}
+          />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute path="/profile/edit" component={ProfileEdit} />

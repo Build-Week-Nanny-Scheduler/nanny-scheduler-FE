@@ -26,7 +26,7 @@ const Dashboard = ({ history }) => {
 
   return (
     <div className="dashboardPage">
-      <h1>Dashboard</h1>
+      {nannyStatus ? <h1>Requests List</h1> : <h1>Find Available Nannies</h1>}
       <div className="cardBox">
         {nannyStatus ? (
           <RequestProvider>
