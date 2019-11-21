@@ -31,13 +31,13 @@ const NannyList = () => {
             <div>{item.rates ? item.rates : "Ask Me"}</div>
             <div>Services:</div>
             <div>{item.services ? item.services : "Ask Me"}</div>
-            <Link to={`/${item.id}/requestnanny`}>
-              Send {item.firstName} a request
-            </Link>
           </div>
-          <button className="otherLink" to="#">
+          <Link className="otherLink" to={`/${item.id}/requestnanny`}>
+            <div className="invert">Send {item.firstName} a request</div>
+          </Link>
+          {/*}<button className="otherLink" to="#">
             Request
-          </button>
+          </button>*/}
         </div>
       ))}
     </>
