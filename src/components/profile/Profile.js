@@ -39,10 +39,14 @@ const Profile = () => {
         <h1>Your Profile</h1>
         {!editing ? (
           <div className="card2Grid">
-            <div>Username: {userInfo.username}</div>
+            <div>Username:</div>
             <div>
-              Name: {userInfo.firstName} {userInfo.lastName}
+              {userInfo.username}</div>
+            <div>Name:</div>
+            <div>
+              {userInfo.firstName} {userInfo.lastName}
             </div>
+            <div>Location:</div>
             <div>
               Location: {userInfo.city}, {userInfo.state}
             </div>
@@ -51,7 +55,7 @@ const Profile = () => {
         ) : (
           <ProfileEdit userInfo={userInfo} setFlag={changeFlag} />
         )}
-        <button
+        <button className="editButton"
           onClick={e => {
             e.preventDefault();
             setEditing(!editing);
@@ -59,7 +63,7 @@ const Profile = () => {
         >
           {editing ? <>Cancel Edit</> : <>EditProfile</>}
         </button>
-        <Link to="/profile/delete">Delete Profile</Link>
+        <Link className="delProfile" to="/profile/delete">Delete Profile</Link>
       </div>
       <div className="submittedRequests">
         <SubmittedRequests />
