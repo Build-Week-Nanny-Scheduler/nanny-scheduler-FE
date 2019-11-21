@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { axiosWithAuth } from "axios";
+import { axiosWithAuth } from "../../../utils/axiosWithAuth";
 import { Link } from "react-router-dom";
 
 import { RequestContext } from "../../../contexts/requestContext";
@@ -34,7 +34,7 @@ const RequestList = () => {
   };
 
   return (
-<div>
+    <div>
       {!requestList || requestList.length < 1 ? (
         <h1>{loadingText}</h1>
       ) : pendingRequests.length < 1 ? (
