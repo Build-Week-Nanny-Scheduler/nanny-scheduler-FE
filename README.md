@@ -1,4 +1,32 @@
+# Nanny in a Flash
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Setup
+This project has the following dependencies:
+
+### [FORMIK](https://jaredpalmer.com/formik/docs/overview#installation)
+```
+npm install formik --save
+```
+### [Yup](https://jaredpalmer.com/formik/docs/overview#installation)
+```
+npm install -S yup
+```
+### [SASS](https://sass-lang.com/)
+```
+$ npm install axios
+```
+### [axios](https://github.com/axios/axios)
+```
+npm install node-sass
+```
+
+## File Path Structurer
+Most files of interest will be found in the standard ```src/components``` folder in self explanatory folder names such as ```auth```which contains the: Login, Logout, Register forms. Or ```layout``` which contains the display components: Dashboard, Home... ```navigation``` which contains the NavBar.... and so on.
+
+The exception to this rule is the ```src/contexts``` which contains the components that call the back-end data though the required APIs.
+
+And, the ```src/SASS``` folder which contains the build if the included sass styles.
 
 ## Available Scripts
 

@@ -57,70 +57,9 @@
   @media (min-width: $desktop) {}
 }
 
-//NAV MENU
-.pageMenu {
-  position: absolute;
-  top: 0px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  height: 100%;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-flow: column;
-  background: $maincolor;
-  .navBar {
-    display: flex;
-    flex-flow: column wrap;
-    margin: auto 4px;
-    //height: 100%;
-    background: $maincolor;
-    z-index: 999;
-    width: 100%;
-    a {
-      width: 90%;
-      border: solid 2px black;
-      margin: 3px auto;
-      padding: 20px 0;
-      font-size: 2rem;
-      background-color: $maincolor2;
-      color: black;
-      text-decoration: none;
-    }
-  }
-  @media (min-width: $tablet) {}
-  @media (min-width: $desktop) {}
+@import 'SASS/NavBar';
+@import 'SASS/Home';
 
-}
-
-//HOME/DASHBOARD buttons
-.homePage {
-  display: flex;
-  flex-flow: column wrap;
-  a {
-    width: 85%;
-    background: $maincolor;
-    margin: 20px auto;
-    font-size: 3.0rem;
-    border-radius: 15px;
-    border: 1px solid black;
-    color: white;
-    font-family: 'Arizonia', cursive;
-  }
-  h1 {
-    width: 80%;
-    font-size: 1.8rem;
-    margin: 8px auto;
-    padding: 0;
-  }
-  p {
-    width: 80%;
-    font-size: 2.8rem;
-    font-family: 'Arizonia', cursive;
-    margin: 8px auto;
-    padding: 0;
-  }
-}
 
 //Create Request Page
 .createRequestPage {
