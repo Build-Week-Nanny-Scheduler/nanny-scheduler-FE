@@ -4,7 +4,9 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import YesNo from "../../components/layout/yesno";
 import States from "../layout/States";
 const ProfileEdit = () => {
-  const [userInfo, setUserInfo] = useContext(UserInfoContext);
+  const userInfo = useContext(UserInfoContext);
+  console.log(userInfo);
+
   return (
     <div>
       <form>
@@ -12,23 +14,27 @@ const ProfileEdit = () => {
 
         <input type="text" name="LastName" placeholder="Last Name" />
 
-        <input
-          type="text"
-          name="services"
-          placeholder="Services Offered (ex: childcare, cleaning, cooking)"
-        />
+        {userInfo.isNanny ? (
+          <>
+            <input
+              type="text"
+              name="services"
+              placeholder="Services Offered (ex: childcare, cleaning, cooking)"
+            />
 
-        <input type="text" name="rates" placeholder="Rate" />
+            <input type="text" name="rates" placeholder="Rate" />
 
-        <input
-          type="text"
-          name="Available"
-          placeholder="Typical Availability"
-        />
-        <p>Willing to drive children?</p>
-        <select name="canDrive">
-          <YesNo />
-        </select>
+            <input
+              type="text"
+              name="Available"
+              placeholder="Typical Availability"
+            />
+            <p>Willing to drive children?</p>
+            <select name="canDrive">
+              <YesNo />
+            </select>
+          </>
+        ) : null}
         <input type="text" name="city" placeholder="City" />
 
         <select name="state">
