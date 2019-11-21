@@ -6,10 +6,8 @@ import * as Yup from "yup";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const CreateRequestFrom = ({ history }) => {
-  const [requestForm, setRequestForm] = useState([]);
   const [nannyInfo, setNannyInfo] = useState({});
   const [flag, setFlag] = useState(false);
-  const [name, setName] = useState();
 
   const [credentials, setCredentials] = useState({
     nannyUserID: nannyInfo.id,
@@ -23,14 +21,6 @@ const CreateRequestFrom = ({ history }) => {
   });
 
   const userID = localStorage.getItem("userID");
-
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`/users/${userID}`)
-  //     .then(response => {
-  //       setName(`${response.data.firstName} ${response.data.lastName}`);
-  //     });
-  // }, []);
 
   const link = window.location.href;
   let nannyUserID = link.match(/\/\b\d+\/\b/g);
@@ -54,51 +44,63 @@ const CreateRequestFrom = ({ history }) => {
 
   const submitHandler = e => {
     e.preventDefault();
-    axiosWithAuth().post("/requests");
+    axiosWithAuth()
+      .post("/requests", credentials)
+      .then(() => {
+        console.log("success");
+      })
+      .catch(err => console.log(err));
   };
   return (
     <div className="createRequestPage">
       <h1>Schedule {nannyInfo.firstName}</h1>
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={credentials.name}
-        onChange={e => changeHandler(e)}
-      />
-      <input
-        type="text"
-        name="numberOfKids"
-        placeholder="Number of Kids"
-        value={credentials.numberOfKids}
-        onChange={e => changeHandler(e)}
-      />
-      <input
-        type="text"
-        name="kidsAges"
-        placeholder="Kids' Ages"
-        value={credentials.kidsAges}
-        onChange={e => changeHandler(e)}
-      />
-      <input
-        type="text"
-        name="timeNeeded"
-        placeholder="Time Needed"
-        value={credentials.timeNeeded}
-        onChange={e => changeHandler(e)}
-      />
-      <input
-        type="text"
-        name="city"
-        placeholder="city"
-        value={credentials.city}
-        onChange={e => changeHandler(e)}
-      />
-      <form>
+      <form onSubmit={e => submitHandler(e)}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={credentials.name}
+          onChange={e => changeHandler(e)}
+          required
+        />
+        <input
+          type="text"
+          name="numberOfKids"
+          placeholder="Number of Kids"
+          value={credentials.numberOfKids}
+          onChange={e => changeHandler(e)}
+          required
+        />
+        <input
+          type="text"
+          name="kidsAges"
+          placeholder="Kids' Ages"
+          value={credentials.kidsAges}
+          onChange={e => changeHandler(e)}
+          required
+        />
+        <input
+          type="text"
+          name="timeNeeded"
+          placeholder="Time Needed"
+          value={credentials.timeNeeded}
+          onChange={e => changeHandler(e)}
+          required
+        />
+        <input
+          type="text"
+          name="city"
+          placeholder="city"
+          value={credentials.city}
+          onChange={e => changeHandler(e)}
+          required
+        />
+
         <select
           name="state"
           value={credentials.state}
           onChange={e => changeHandler(e)}
+          required
         >
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
