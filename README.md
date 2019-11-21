@@ -1,5 +1,10 @@
-# Nanny in a Flash
+# Nanny in a Flash Front-End App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+[Hosted here](https://nanny-scheduler-fe.anthonykizer88.now.sh/)
+
+# About
+Nanny in a Flash helps a busy parent. Between work meetings, PTA meetings, Board meetings, you barely have time for yourself, and when you do, finding that right child care provider can be difficult. That's where Nanny in a Flash comes in. As a parent, you can log in, select a nanny based on availibility, location, or what services they can offer, and then request their services.
 
 ## Setup
 This project has the following dependencies:
@@ -65,32 +70,9 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Our Team
+* [Marina Baskova](https://github.com/MarinaBaskova) Project Lead
+* [Anthony Kizer](https://github.com/ajkizer) Front End Architect
+* [Russ Hacker](https://github.com/newbi462) Front End Architect
+* [Michael Phelps](https://github.com/mphelps1978) Web/UI Developer
+* [Amber Sorensen](https://github.com/a-soren) Back End Engineer
