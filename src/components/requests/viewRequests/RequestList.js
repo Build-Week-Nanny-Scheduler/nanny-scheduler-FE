@@ -1,60 +1,87 @@
 import React, { useState, useEffect, useContext } from "react";
-import { axiosWithAuth } from "axios";
+import { axiosWithAuth } from "../../../utils/axiosWithAuth";
 import { RequestContext } from "../../../contexts/requestContext";
 
 const RequestList = () => {
-  // const [requestList, setRequestList] = useContext(RequestContext);
+  const [requestList, setRequestList] = useContext(RequestContext);
+  const [loadingText, setLoadingText] = useState("Loading...");
+  const [pendingRequests, setPendingRequests] = useState([]);
+  const [acceptedRequests, setAcceptedRequests] = useState([]);
 
-  const [requestList, setRequestList] = useState([
-    {
-      name: "Mary Jenkins",
-      city: "San Francisco",
-      state: "California",
-      numberOfKids: "3",
-      kidsAges: "1, 3, 5",
-      timeNeeded: "5:30pm - 8pm monday, wednesday"
-    },
-    {
-      name: "Bob Barker",
-      city: "San Francisco",
-      state: "California",
-      numberOfKids: "3",
-      kidsAges: "2, 5, 8",
-      timeNeeded: "4:30pm - 8pm monday - friday"
-    },
-    {
-      name: "Chu Lor",
-      city: "Chicago",
-      state: "Illinois",
-      numberOfKids: "1",
-      kidsAges: "3",
-      timeNeeded: "5:30pm - 9pm monday - friday"
-    },
-    {
-      name: "Robert Robertson",
-      city: "Chicago",
-      state: "Illinois",
-      numberOfKids: "5",
-      kidsAges: "3, 5, 7, 8, 9",
-      timeNeeded: "2:30pm - 9pm monday - friday"
+  useEffect(() => {
+    if (requestList && requestList.length > 0) {
+      const pending = requestList.filter(request => !request.accepted);
+      const accepted = requestList.filter(request => request.accepted);
+      setPendingRequests(pending);
+      setAcceptedRequests(accepted);
     }
-  ]);
+  }, [requestList]);
+
+  setTimeout(() => {
+    setLoadingText("No Requests");
+  }, 1000);
+
+  const toPending = item => {
+    const id = item.id;
+    axiosWithAuth()
+      .put(`/requests/${id}`, { ...item, accepted: false })
+      .then(res => {
+        console.log(res);
+      });
+  };
 
   return (
     <div>
-      {requestList.map(item => (
-        <div key={item} className="nannyCard">
-          <h2>
-            {item.name} needs a Nanny
-          </h2>
-          <div key={item.id} className="card2Grid">
-            <div>Number Of Kids:</div><div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
-            <div>Kids Ages:</div><div>{item.kidsAges ? item.kidsAges : "Ask Me"}</div>
-            <div>Location:</div><div>{item.city ? item.city : "Ask Me"}, {item.state ? item.state : "Ask Me"}</div>
-            <div>Time Needed:</div><div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
-          </div>
+      {!requestList || requestList.length < 1 ? (
+        <h1>{loadingText}</h1>
+      ) : pendingRequests.length < 1 ? (
+        <div className="pendingRequests">
+          <h1>No Pending Requests</h1>
         </div>
-      ))}
+      ) : (
+        pendingRequests.map(item => (
+          <div key={item} className="nannyCard">
+            <h2>{item.name} wants to hire you!</h2>
+            <div key={item.id} className="card2Grid">
+              <div>Number Of Kids:</div>
+              <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
+              <div>Kids Ages:</div>
+              <div>{item.kidsAges ? item.kidsAges : "Ask Me"}</div>
+              <div>Location:</div>
+              <div>
+                {item.city ? item.city : "Ask Me"},{" "}
+                {item.state ? item.state : "Ask Me"}
+              </div>
+              <div>Time Needed:</div>
+              <div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
+            </div>
+          </div>
+        ))
+      )}
+      {!requestList || requestList.length < 1 ? null : acceptedRequests.length <
+        1 ? (
+        <h1>No Accepted Requests</h1>
+      ) : (
+        acceptedRequests.map(item => (
+          <div key={item} className="nannyCard">
+            <h2>{item.name} is scheduled for this request</h2>
+            <div key={item.id} className="card2Grid">
+              <div>Number Of Kids:</div>
+              <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
+              <div>Kids Ages:</div>
+              <div>{item.kidsAges ? item.kidsAges : "Ask Me"}</div>
+              <div>Location:</div>
+              <div>
+                {item.city ? item.city : "Ask Me"},{" "}
+                {item.state ? item.state : "Ask Me"}
+              </div>
+              <div>Time Needed:</div>
+              <div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
+            </div>
+            <button onClick={() => toPending(item)}>Move to Pending</button>
+          </div>
+        ))
+      )}
     </div>
   );
 };

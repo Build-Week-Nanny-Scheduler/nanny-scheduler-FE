@@ -138,22 +138,8 @@ export const RegisterFromFormik = withFormik({
       .post("/auth/register", values)
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        const token = res.data.token;
-        let base64Url = res.data.token.split(".")[1];
-        let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-        let jsonPayload = decodeURIComponent(
-          atob(base64)
-            .split("")
-            .map(function(c) {
-              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-            })
-            .join("")
-        );
-        const userID = jsonPayload.split(",")[0].split(":")[1];
-        console.log(userID);
+        const userID = res.data.id;
         localStorage.setItem("userID", userID);
-      })
-      .then(res => {
         window.location.href = "/dashboard";
       })
       .catch(error => {

@@ -20,7 +20,7 @@ export const NannyProvider = props => {
         setNannyList(nannies);
         console.log(nannyList);
       })
-      .catch();
+      .catch(err => console.log(err));
   }, []);
 
   console.log(nannyList);

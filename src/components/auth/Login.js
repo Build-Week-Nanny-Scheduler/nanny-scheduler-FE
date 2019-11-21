@@ -6,7 +6,7 @@ import * as Yup from "yup";
 
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-const LoginFrom = ({ values, errors, touched, status, history }) => {
+const LoginFrom = ({ values, errors, touched, status }) => {
   const [credentials, setCredentials] = useState([]);
 
   useEffect(() => {
@@ -45,22 +45,8 @@ export const LoginFromFormik = withFormik({
       .post("/auth/login", values)
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        const token = res.data.token;
-        let base64Url = res.data.token.split(".")[1];
-        let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-        let jsonPayload = decodeURIComponent(
-          atob(base64)
-            .split("")
-            .map(function(c) {
-              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-            })
-            .join("")
-        );
-        const userID = jsonPayload.split(",")[0].split(":")[1];
-        console.log(userID);
+        const userID = res.data.user.id;
         localStorage.setItem("userID", userID);
-      })
-      .then(res => {
         window.location.href = "/dashboard";
       })
       .catch(error => {
