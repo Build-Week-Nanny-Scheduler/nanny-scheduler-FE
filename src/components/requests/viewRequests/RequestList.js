@@ -10,6 +10,7 @@ const RequestList = () => {
   const [loadingText, setLoadingText] = useState("Loading...");
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     if (requestList && requestList.length > 0) {
@@ -19,6 +20,20 @@ const RequestList = () => {
       setAcceptedRequests(accepted);
     }
   }, [requestList]);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/requests/all")
+      .then(res => {
+        const requests = res.data;
+        const id = localStorage.getItem("userID");
+        const filteredRequests = requests.filter(
+          request => request.nannyUserID == id
+        );
+        setRequestList(filteredRequests);
+      })
+      .catch();
+  }, [flag]);
 
   setTimeout(() => {
     setLoadingText("No Requests");
@@ -30,6 +45,35 @@ const RequestList = () => {
       .put(`/requests/${id}`, { ...item, accepted: false })
       .then(res => {
         console.log(res);
+        setFlag(!flag);
+      });
+  };
+
+  const acceptRequest = item => {
+    const id = item.id;
+    axiosWithAuth()
+      .put(`/requests/${id}`, { ...item, accepted: true })
+      .then(res => {
+        console.log(res);
+        setFlag(!flag);
+      });
+  };
+
+  const cancelRequest = item => {
+    const id = item.id;
+    axiosWithAuth()
+      .delete(`/requests/${id}`)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const getNannyName = id => {
+    axiosWithAuth()
+      .get(`/users/${id}`)
+      .then(res => {
+        return res.data.firstName;
       });
   };
 
@@ -58,6 +102,7 @@ const RequestList = () => {
               <div>Time Needed:</div>
               <div>{item.timeNeeded ? item.timeNeeded : "Ask Me"}</div>
             </div>
+            <button onClick={() => acceptRequest(item)}>Accept</button>
           </div>
         ))
       )}
@@ -67,7 +112,7 @@ const RequestList = () => {
       ) : (
         acceptedRequests.map(item => (
           <div key={item} className="nannyCard">
-            <h2>{item.name} is scheduled for this request</h2>
+            <h2>You have scheduled this job with {item.name}</h2>
             <div key={item.id} className="card2Grid">
               <div>Number Of Kids:</div>
               <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>

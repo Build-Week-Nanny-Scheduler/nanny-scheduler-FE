@@ -30,7 +30,7 @@ const Dashboard = ({ history }) => {
       <div className="cardBox">
         {nannyStatus ? (
           <RequestProvider>
-            <RequestList />
+            <RequestList history={history} />
           </RequestProvider>
         ) : (
           <NannyProvider>
