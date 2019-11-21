@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { withFormik, Form, Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
@@ -154,7 +154,13 @@ const CreateRequestFrom = ({ history }) => {
           <option value="Wisconsin">Wisconsin</option>
           <option value="Wyoming">Wyoming</option>
         </select>
-        <button>Submit</button>
+        <div
+          onClick={
+            (() => setTimeout(() => (window.location.href = "/submitted")), 500)
+          }
+        >
+          <button>Submit</button>
+        </div>
       </form>
     </div>
   );
@@ -193,7 +199,6 @@ export const CreateRequest = withFormik({
     name: Yup.string().required()
   }),
   handleSubmit(values, { setStatus }) {
-    console.log("submit");
     axiosWithAuth()
       .post("/requests", values)
       .then(res => {
