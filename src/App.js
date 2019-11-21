@@ -25,10 +25,11 @@ const App = ({ history }) => {
         </Link>
         <Route exact path="/menu" component={Navigation} />
         <Route exact path="/" component={Home} />
-        <Route path="/:id/requestnanny" component={CreateRequest} />
+
         <Route path="/register" component={RegisterFromFormik} />
         <Route path="/login" component={LoginFromFormik} />
         <UserInfoProvider>
+          <Route path="/:id/requestnanny" component={CreateRequest} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/profile" component={Profile} />
         </UserInfoProvider>

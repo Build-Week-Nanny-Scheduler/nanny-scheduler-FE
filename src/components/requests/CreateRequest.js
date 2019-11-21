@@ -5,71 +5,96 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-const CreateRequestFrom = ({ values, errors, touched }) => {
+const CreateRequestFrom = ({ history }) => {
   const [requestForm, setRequestForm] = useState([]);
   const [nannyInfo, setNannyInfo] = useState({});
   const [flag, setFlag] = useState(false);
+  const [name, setName] = useState();
+
+  const [credentials, setCredentials] = useState({
+    nannyUserID: nannyInfo.id,
+    accepted: false,
+    name: "",
+    city: "",
+    state: "",
+    numberOfKids: "",
+    kidsAges: "",
+    timeNeeded: ""
+  });
+
+  const userID = localStorage.getItem("userID");
+
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get(`/users/${userID}`)
+  //     .then(response => {
+  //       setName(`${response.data.firstName} ${response.data.lastName}`);
+  //     });
+  // }, []);
 
   const link = window.location.href;
-
   let nannyUserID = link.match(/\/\b\d+\/\b/g);
-
   nannyUserID = nannyUserID[0].split("/")[1];
 
   useEffect(() => {
     axiosWithAuth()
       .get(`/users/${nannyUserID}`)
-      .then(
-        response => {
-          console.log(response.data);
-          setNannyInfo(response.data);
-        },
-        [flag]
-      )
+      .then(response => {
+        setNannyInfo(response.data);
+        setCredentials({ ...credentials, nannyUserID: response.data.id });
+      })
       .catch(err => {
         console.log(err);
       });
   }, [flag]);
 
+  const changeHandler = e => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
   return (
-    <>
-      <div className="createRequestPage">
-        <h1>Schedule {nannyInfo.firstName}</h1>
-      </div>
-      <Form>
-        <Field
-          type="text"
-          name="nannyUserID"
-          placeholder=""
-          type="hidden"
-          value={nannyUserID}
-        />
-        <Field
-          type="text"
-          name="accepted"
-          placeholder=""
-          type="hidden"
-          value="false"
-        />
-        <Field type="text" name="numberOfKids" placeholder="How Many Kids" />
-        {touched.numberOfKids && errors.numberOfKids && (
-          <p>{errors.numberOfKids}</p>
-        )}
-
-        <Field type="text" name="kidsAge" placeholder="Age of Kid(s)" />
-        {touched.kidsAge && <p>{errors.kidsAge}</p>}
-
-        <Field
-          type="text"
-          name="timeNeeded"
-          placeholder="Time needed? Be specific (ex: 5pm - 7pm monday - friday)"
-        />
-        {touched.timeNeeded && <p>{errors.timeNeeded}</p>}
-
-        <Field type="text" name="city" placeholder="Your City" />
-        {touched.city && <p>{errors.city}</p>}
-
-        <Field as="select" name="state">
+    <div className="createRequestPage">
+      <h1>Schedule {nannyInfo.firstName}</h1>
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={credentials.name}
+        onChange={e => changeHandler(e)}
+      />
+      <input
+        type="text"
+        name="numberOfKids"
+        placeholder="Number of Kids"
+        value={credentials.numberOfKids}
+        onChange={e => changeHandler(e)}
+      />
+      <input
+        type="text"
+        name="kidsAges"
+        placeholder="Kids' Ages"
+        value={credentials.kidsAges}
+        onChange={e => changeHandler(e)}
+      />
+      <input
+        type="text"
+        name="timeNeeded"
+        placeholder="Time Needed"
+        value={credentials.timeNeeded}
+        onChange={e => changeHandler(e)}
+      />
+      <input
+        type="text"
+        name="city"
+        placeholder="city"
+        value={credentials.city}
+        onChange={e => changeHandler(e)}
+      />
+      <form>
+        <select
+          name="state"
+          value={credentials.state}
+          onChange={e => changeHandler(e)}
+        >
           <option>Please Choose Your State</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
@@ -121,246 +146,10 @@ const CreateRequestFrom = ({ values, errors, touched }) => {
           <option value="West Virginia">West Virginia</option>
           <option value="Wisconsin">Wisconsin</option>
           <option value="Wyoming">Wyoming</option>
-        </Field>
-        {touched.state && errors.state && <p>{errors.state}</p>}
-
-        {/*HOw do we deal with more than one age, when more than one kid?*/}
-
-        {/* <label>
-          Start Time:
-        </label>
-        <div>
-          <Field
-            as="select"
-            name="startTimeH"
-          >
-            <option>HH</option>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
-            <option value="">7</option>
-            <option value="">8</option>
-            <option value="">9</option>
-            <option value="">10</option>
-            <option value="">11</option>
-            <option value="">12</option>
-          </Field>
-          {touched.startTimeH && errors.startTimeH && <p>{errors.startTimeH}</p>}
-
-          <Field
-            as="select"
-            name="startTimeM"
-          >
-            <option>MM</option>
-            <option value="">0</option>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
-            <option value="">7</option>
-            <option value="">8</option>
-            <option value="">9</option>
-            <option value="">10</option>
-            <option value="">11</option>
-            <option value="">12</option>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
-            <option value="">7</option>
-            <option value="">8</option>
-            <option value="">9</option>
-            <option value="">10</option>
-            <option value="">11</option>
-            <option value="">12</option>
-            <option value="">13</option>
-            <option value="">14</option>
-            <option value="">15</option>
-            <option value="">16</option>
-            <option value="">17</option>
-            <option value="">18</option>
-            <option value="">19</option>
-            <option value="">20</option>
-            <option value="">21</option>
-            <option value="">22</option>
-            <option value="">23</option>
-            <option value="">24</option>
-            <option value="">25</option>
-            <option value="">26</option>
-            <option value="">27</option>
-            <option value="">28</option>
-            <option value="">29</option>
-            <option value="">30</option>
-            <option value="">31</option>
-            <option value="">32</option>
-            <option value="">33</option>
-            <option value="">34</option>
-            <option value="">35</option>
-            <option value="">36</option>
-            <option value="">37</option>
-            <option value="">38</option>
-            <option value="">39</option>
-            <option value="">40</option>
-            <option value="">41</option>
-            <option value="">42</option>
-            <option value="">43</option>
-            <option value="">44</option>
-            <option value="">45</option>
-            <option value="">46</option>
-            <option value="">47</option>
-            <option value="">48</option>
-            <option value="">49</option>
-            <option value="">50</option>
-            <option value="">51</option>
-            <option value="">52</option>
-            <option value="">53</option>
-            <option value="">54</option>
-            <option value="">55</option>
-            <option value="">56</option>
-            <option value="">57</option>
-            <option value="">58</option>
-            <option value="">59</option>
-          </Field>
-          {touched.startTimeM && errors.startTimeM && <p>{errors.startTimeM}</p>}
-
-          <Field
-            as="select"
-            name="startAMPM"
-          >
-            <option>AM or PM?</option>
-            <option value="AM">AM</option>
-            <option value="PM">PM</option>
-          </Field>
-          {touched.startAMPM && errors.startAMPM && <p>{errors.startAMPM}</p>}
-        </div>
-
-        <label>
-          End Time:
-        </label>
-        <div>
-          <Field
-            as="select"
-            name="endTimeH"
-          >
-            <option>HH</option>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
-            <option value="">7</option>
-            <option value="">8</option>
-            <option value="">9</option>
-            <option value="">10</option>
-            <option value="">11</option>
-            <option value="">12</option>
-          </Field>
-          {touched.endTimeH && errors.endTimeH && <p>{errors.endTimeH}</p>}
-
-          <Field
-            as="select"
-            name="endTimeM"
-          >
-            <option>MM</option>
-            <option value="">0</option>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
-            <option value="">7</option>
-            <option value="">8</option>
-            <option value="">9</option>
-            <option value="">10</option>
-            <option value="">11</option>
-            <option value="">12</option>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
-            <option value="">7</option>
-            <option value="">8</option>
-            <option value="">9</option>
-            <option value="">10</option>
-            <option value="">11</option>
-            <option value="">12</option>
-            <option value="">13</option>
-            <option value="">14</option>
-            <option value="">15</option>
-            <option value="">16</option>
-            <option value="">17</option>
-            <option value="">18</option>
-            <option value="">19</option>
-            <option value="">20</option>
-            <option value="">21</option>
-            <option value="">22</option>
-            <option value="">23</option>
-            <option value="">24</option>
-            <option value="">25</option>
-            <option value="">26</option>
-            <option value="">27</option>
-            <option value="">28</option>
-            <option value="">29</option>
-            <option value="">30</option>
-            <option value="">31</option>
-            <option value="">32</option>
-            <option value="">33</option>
-            <option value="">34</option>
-            <option value="">35</option>
-            <option value="">36</option>
-            <option value="">37</option>
-            <option value="">38</option>
-            <option value="">39</option>
-            <option value="">40</option>
-            <option value="">41</option>
-            <option value="">42</option>
-            <option value="">43</option>
-            <option value="">44</option>
-            <option value="">45</option>
-            <option value="">46</option>
-            <option value="">47</option>
-            <option value="">48</option>
-            <option value="">49</option>
-            <option value="">50</option>
-            <option value="">51</option>
-            <option value="">52</option>
-            <option value="">53</option>
-            <option value="">54</option>
-            <option value="">55</option>
-            <option value="">56</option>
-            <option value="">57</option>
-            <option value="">58</option>
-            <option value="">59</option>
-          </Field>
-          {touched.endTimeM && errors.endTimeM && <p>{errors.endTimeM}</p>}
-
-          <Field
-            as="select"
-            name="endAMPM"
-          >
-            <option>AM or PM?</option>
-            <option value="AM">AM</option>
-            <option value="PM">PM</option>
-          </Field>
-          {touched.endAMPM && errors.endAMPM && <p>{errors.endAMPM}</p>}
-        </div>
-
- */}
-
-        <button type="submit">Submit</button>
-      </Form>
-    </>
+        </select>
+        <button>Submit</button>
+      </form>
+    </div>
   );
 };
 
@@ -369,10 +158,11 @@ export const CreateRequest = withFormik({
     city,
     state,
     numberOfKids,
-    kidsAge,
+    kidsAges,
     timeNeeded,
     nannyUserID,
-    accepted
+    accepted,
+    name
   }) {
     return {
       accepted: accepted || false,
@@ -380,20 +170,23 @@ export const CreateRequest = withFormik({
       city: city || "",
       state: state || "",
       numberOfKids: numberOfKids || "",
-      kidsAge: kidsAge || "",
-      timeNeeded: timeNeeded || ""
+      kidsAges: kidsAges || "",
+      timeNeeded: timeNeeded || "",
+      name: name || ""
     };
   },
   validationSchema: Yup.object().shape({
     accepted: Yup.bool().required(),
-    nannyUserID: Yup.string().required(),
+    nannyUserID: Yup.number().required(),
     city: Yup.string().required(),
     state: Yup.string().required(),
     numberOfKids: Yup.string().required(),
-    kidsAge: Yup.string().required(),
-    timeNeeded: Yup.string().required()
+    kidsAges: Yup.string().required(),
+    timeNeeded: Yup.string().required(),
+    name: Yup.string().required()
   }),
   handleSubmit(values, { setStatus }) {
+    console.log("submit");
     axiosWithAuth()
       .post("/requests", values)
       .then(res => {
