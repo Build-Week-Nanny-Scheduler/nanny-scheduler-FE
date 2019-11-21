@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { UserInfoContext } from "../../contexts/userInfoContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import NannyProfile from "./NannyProfile";
@@ -57,6 +58,7 @@ const Profile = () => {
       >
         {editing ? <>Cancel Edit</> : <>EditProfile</>}
       </button>
+      <Link to="/profile/delete">Delete Profile</Link>
     </div>
   );
 };

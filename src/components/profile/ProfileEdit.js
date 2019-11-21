@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { UserInfoContext } from "../../contexts/userInfoContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import YesNo from "../../components/layout/yesno";
@@ -103,6 +104,7 @@ const ProfileEdit = props => {
           <States />
         </select>
         <button type="submit">Save Edit</button>
+        <Link to="/profile/delete">Delete Profile</Link>
       </form>
     </div>
   );

@@ -13,6 +13,7 @@ import { UserInfoProvider } from "./contexts/userInfoContext";
 import Profile from "./components/profile/Profile";
 import Logout from "./components/auth/Logout";
 import ProfileEdit from "./components/profile/ProfileEdit";
+import ProfileDelete from "./components/profile/ProfileDelete";
 const App = ({ history }) => {
   return (
     <div className="App">
@@ -33,6 +34,7 @@ const App = ({ history }) => {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute path="/profile/edit" component={ProfileEdit} />
+          <PrivateRoute path="/profile/delete" component={ProfileDelete} />
         </UserInfoProvider>
         <Route path="/logout" component={Logout} />
 
