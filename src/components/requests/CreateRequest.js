@@ -47,7 +47,7 @@ const CreateRequestFrom = ({ history }) => {
     axiosWithAuth()
       .post("/requests", credentials)
       .then(() => {
-        console.log("success");
+        history.push("/dashboard");
       })
       .catch(err => console.log(err));
   };
@@ -166,50 +166,7 @@ const CreateRequestFrom = ({ history }) => {
   );
 };
 
-export const CreateRequest = withFormik({
-  mapPropsToValues({
-    city,
-    state,
-    numberOfKids,
-    kidsAges,
-    timeNeeded,
-    nannyUserID,
-    accepted,
-    name
-  }) {
-    return {
-      accepted: accepted || false,
-      nannyUserID: nannyUserID || "",
-      city: city || "",
-      state: state || "",
-      numberOfKids: numberOfKids || "",
-      kidsAges: kidsAges || "",
-      timeNeeded: timeNeeded || "",
-      name: name || ""
-    };
-  },
-  validationSchema: Yup.object().shape({
-    accepted: Yup.bool().required(),
-    nannyUserID: Yup.number().required(),
-    city: Yup.string().required(),
-    state: Yup.string().required(),
-    numberOfKids: Yup.string().required(),
-    kidsAges: Yup.string().required(),
-    timeNeeded: Yup.string().required(),
-    name: Yup.string().required()
-  }),
-  handleSubmit(values, { setStatus }) {
-    axiosWithAuth()
-      .post("/requests", values)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-})(CreateRequestFrom);
-
+export default CreateRequestFrom;
 /*
 data needed for creating a request:
 city

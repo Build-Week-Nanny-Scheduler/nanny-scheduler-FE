@@ -9,7 +9,6 @@ export const Navigation = () => {
       <nav className="navBar">
         <Link to="/https://eager-meninsky-104020.netlify.com/">Home</Link>
         <Link to="/">Dashboard</Link>
-        <Link to="/createrequest">Create Request</Link>
         {token ? (
           <Link to="/profile">Profile</Link>
         ) : (
