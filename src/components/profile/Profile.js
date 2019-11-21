@@ -1,17 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserInfoContext } from "../../contexts/userInfoContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import NannyProfile from "./NannyProfile";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserInfoContext);
   const [flag, setFlag] = useState(false);
 
-  const userIDDecoded = localStorage.getItem("userID");
-  console.log(userIDDecoded);
+  const userID = localStorage.getItem("userID");
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/users/${userIDDecoded}`)
+      .get(`/users/${userID}`)
       .then(
         response => {
           console.log(response.data);
@@ -25,14 +25,22 @@ const Profile = () => {
   }, [flag]);
 
   return (
+
     <div className="profilePage">
       <h1>Your Profile</h1>
-      <div className="card2Grid">
-        <div>Username:</div><div>{userInfo.username}</div>
-        <div>Name:</div><div>{userInfo.firstName} {userInfo.lastName}</div>
-        <div>Location:</div><div>{userInfo.city}, {userInfo.state}</div>
-        <div>Services offered:</div><div>{userInfo.services}</div>
+    <div className="card2Grid">
+      <div>Username: {userInfo.username}</div>
+      <div>
+        Name: {userInfo.firstName} {userInfo.lastName}
       </div>
+      <div>
+
+          Location: {userInfo.city}, {userInfo.state}
+
+      </div>
+      {userInfo.isNanny ? <NannyProfile userInfo={userInfo} /> : null}
+
+    </div>
     </div>
   );
 };
