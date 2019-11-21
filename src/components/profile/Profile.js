@@ -25,18 +25,22 @@ const Profile = () => {
   }, [flag]);
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <h3>{userInfo.username}</h3>
-      <p>
-        {userInfo.firstName} {userInfo.lastName}
-      </p>
-      <p>
-        <em>
-          {userInfo.city}, {userInfo.state}
-        </em>
-      </p>
+
+    <div className="profilePage">
+      <h1>Your Profile</h1>
+    <div className="card2Grid">
+      <div>Username: {userInfo.username}</div>
+      <div>
+        Name: {userInfo.firstName} {userInfo.lastName}
+      </div>
+      <div>
+
+          Location: {userInfo.city}, {userInfo.state}
+
+      </div>
       {userInfo.isNanny ? <NannyProfile userInfo={userInfo} /> : null}
+
+    </div>
     </div>
   );
 };

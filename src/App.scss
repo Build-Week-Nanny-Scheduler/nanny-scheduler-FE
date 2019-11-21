@@ -1,3 +1,5 @@
+//@import 'SASS/reset';
+
 @import url('https://fonts.googleapis.com/css?family=Arizonia&display=swap');
 
 @import 'SASS/var';
@@ -160,7 +162,7 @@ form {
     font-size: 1.8rem;
   }
   select {
-    width: 93%;
+    width: 91%;
     margin: 2px auto;
     height: 65px;
     font-size: 1.8rem;
@@ -177,7 +179,7 @@ form {
   }
   div{
     display: flex;
-    width: 94%;
+    width: 91%;
     margin: 1px auto;
     select {
       width: 33%;
@@ -194,18 +196,82 @@ form {
 }
 
 
-//NANNY CARDS
-.nannyCard {
+//DASHBOARD CARDS
+.dashboardPage {
+  h1 {
+    margin: 0.15em 0 0 0.05em;
+    padding: 0;
+  }
+  .cardBox {
+    display: flex;
+    flex-flow: wrap;
+    width: 100;
+    padding: 0 5px;
+    margin: 12px auto 0 auto;
+    .nannyCard {
+      display: flex;
+      flex-flow: column;
+      text-align: left;
+      width: 90%;
+      margin: 2px auto;
+      background: $maincolor;
+      border: solid 2px black;
+      border-radius: 13px;
+      h2 {
+        margin: 0.25em 0 12px 0.5em;
+      }
+      .card2Grid{
+        width: 85%;
+        margin: 0 auto 13px auto;
+        display: flex;
+        flex-flow: row wrap;
+        div {
+          width: 49%;
+          padding: 0.12em 0;
+        }
+      }
+      button {
+        width: 85%;
+        background: $maincolor2;
+        margin: 10px auto;
+        font-size: 3.0rem;
+        border-radius: 15px;
+        border: 1px solid black;
+        color: white;
+        font-family: 'Arizonia', cursive;
+      }
+    }
+  }
+  @media (min-width: $tablet) {
+    width: 100%;
+    .cardBox {
+      .nannyCard {
+        width: 49%;
+      }
+    }
+  }
+  @media (min-width: $desktop) {
+    .cardBox {
+      .nannyCard {
+        width: 32%;
+      }
+    }
+  }
+}
+
+//PROFILE Page
+.profilePage {
   display: flex;
   flex-flow: column;
   text-align: left;
   width: 90%;
-  margin: 2px auto;
+  margin: 12px auto;
   background: $maincolor;
   border: solid 2px black;
   border-radius: 13px;
-  h2 {
+  h1 {
     margin: 0.25em 0 12px 0.5em;
+    padding: 0;
   }
   .card2Grid{
     width: 85%;
