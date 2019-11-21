@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { UserInfoProvider } from "./contexts/userInfoContext";
 import Profile from "./components/profile/Profile";
 import Logout from "./components/auth/Logout";
+import ProfileEdit from "./components/profile/ProfileEdit";
 const App = ({ history }) => {
   return (
     <div className="App">
@@ -31,7 +32,8 @@ const App = ({ history }) => {
         <UserInfoProvider>
           <Route path="/:id/requestnanny" component={CreateRequest} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute path="/profile/edit" component={ProfileEdit} />
         </UserInfoProvider>
         <Route path="/logout" component={Logout} />
 

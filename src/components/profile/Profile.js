@@ -1,17 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserInfoContext } from "../../contexts/userInfoContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import NannyProfile from "./NannyProfile";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserInfoContext);
   const [flag, setFlag] = useState(false);
 
-  const userIDDecoded = localStorage.getItem("userID");
-  console.log(userIDDecoded);
+  const userID = localStorage.getItem("userID");
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/users/${userIDDecoded}`)
+      .get(`/users/${userID}`)
       .then(
         response => {
           console.log(response.data);
@@ -36,7 +36,7 @@ const Profile = () => {
           {userInfo.city}, {userInfo.state}
         </em>
       </p>
-      <p>Services offered: {userInfo.services}</p>
+      {userInfo.isNanny ? <NannyProfile userInfo={userInfo} /> : null}
     </div>
   );
 };
