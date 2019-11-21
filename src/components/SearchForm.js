@@ -39,7 +39,7 @@ export default function SearchForm( props ) {
           name="name"
           tabIndex="0"
           className="prompt search-name"
-          placeholder="search by name"
+          placeholder="Search by City"
           autoComplete="off"
         />
       </form>
