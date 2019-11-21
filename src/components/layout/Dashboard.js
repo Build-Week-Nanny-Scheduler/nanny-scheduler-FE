@@ -25,17 +25,19 @@ const Dashboard = ({ history }) => {
   }, [userID]);
 
   return (
-    <div>
+    <div className="dashboardPage">
       <h1>Dashboard</h1>
-      {nannyStatus ? (
-        <RequestProvider>
-          <RequestList />
-        </RequestProvider>
-      ) : (
-        <NannyProvider>
-          <NannyList />
-        </NannyProvider>
-      )}
+      <div className="cardBox">
+        {nannyStatus ? (
+          <RequestProvider>
+            <RequestList />
+          </RequestProvider>
+        ) : (
+          <NannyProvider>
+            <NannyList />
+          </NannyProvider>
+        )}
+      </div>
     </div>
   );
 };

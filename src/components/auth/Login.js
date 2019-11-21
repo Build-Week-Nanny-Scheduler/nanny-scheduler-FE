@@ -24,7 +24,9 @@ const LoginFrom = ({ values, errors, touched, status }) => {
         <button type="submit">Submit</button>
       </Form>
       <p>Don't Have an Account?</p>
-      <Link to="/register">Sign Up</Link>
+      <Link className="otherLink" to="/register">
+        <div>Sign Up</div>
+      </Link>
     </>
   );
 };
