@@ -17,6 +17,7 @@ export const NannyProvider = props => {
       .get("/users")
       .then(response => {
         const nannies = response.data.filter(checkNanny);
+        console.log(response.data.forEach(nanny => console.log(nanny.city)));
         setNannyList(nannies);
         console.log(nannyList);
       })

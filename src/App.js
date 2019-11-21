@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { RegisterFromFormik } from "./components/auth/Register";
 import { LoginFromFormik } from "./components/auth/Login";
 import Home from "./components/layout/Home";
-import { CreateRequest } from "./components/requests/CreateRequest";
+import CreateRequestFrom from "./components/requests/CreateRequest";
 import { Navigation } from "./components/navigation/NavBar";
 import Dashboard from "./components/layout/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
@@ -30,7 +30,7 @@ const App = ({ history }) => {
         <Route path="/register" component={RegisterFromFormik} />
         <Route path="/login" component={LoginFromFormik} />
         <UserInfoProvider>
-          <Route path="/:id/requestnanny" component={CreateRequest} />
+          <Route path="/:id/requestnanny" component={CreateRequestFrom} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute path="/profile/edit" component={ProfileEdit} />
