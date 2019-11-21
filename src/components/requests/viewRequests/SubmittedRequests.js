@@ -45,7 +45,11 @@ const RequestList = () => {
       ) : (
         pendingRequests.map(item => (
           <div key={item} className="nannyCard">
+<<<<<<< HEAD
             <h2>{item.name} wants to hire you!</h2>
+=======
+            <h2>{item.name} has not responded to this request</h2>
+>>>>>>> master
             <div key={item.id} className="card2Grid">
               <div>Number Of Kids:</div>
               <div>{item.numberOfKids ? item.numberOfKids : "Ask Me"}</div>
