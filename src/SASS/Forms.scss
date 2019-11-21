@@ -1,0 +1,44 @@
+//BASE FORM
+form {
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 12px;
+  input {
+    width: 90%;
+    margin: 1px auto;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+  select {
+    width: 91%;
+    margin: 2px auto;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+  button {
+    width: 85%;
+    background: $maincolor;
+    margin: 10px auto;
+    font-size: 3.0rem;
+    border-radius: 15px;
+    border: 1px solid black;
+    color: white;
+    font-family: 'Arizonia', cursive;
+  }
+  div{
+    display: flex;
+    width: 91%;
+    margin: 1px auto;
+    select {
+      width: 33%;
+      margin: 2px;
+    }
+  }
+  label {
+    margin: 0.15em auto;
+    font-size: 2.1rem;
+    font-weight: bold;
+  }
+  @media (min-width: $tablet) {}
+  @media (min-width: $desktop) {}
+}
