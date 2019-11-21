@@ -7,8 +7,7 @@ import { NannyProvider } from "../../contexts/nannyContext";
 import { RequestProvider } from "../../contexts/requestContext";
 
 const Dashboard = ({ history }) => {
-  const [nannyStatus, setNannyStatus] = useState(false);
-  const [userInfo, setUserInfo] = useContext(UserInfoContext);
+  const [nannyStatus, setNannyStatus] = useState();
 
   const userID = localStorage.getItem("userID");
 
@@ -16,7 +15,11 @@ const Dashboard = ({ history }) => {
     axiosWithAuth()
       .get(`/users/${userID}`)
       .then(response => {
-        console.log(response.data);
+        if (!response.data.isNanny) {
+          setNannyStatus(false);
+        } else {
+          setNannyStatus(true);
+        }
       })
       .catch();
   }, [userID]);
